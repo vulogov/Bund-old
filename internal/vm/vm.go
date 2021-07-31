@@ -17,6 +17,7 @@ type VM struct {
 	RootNS      *NS
 	Options     cmap.Cmap
 	Opcodes     cmap.Cmap
+	Types       cmap.Cmap
 }
 
 func NewVM(name string) *VM {

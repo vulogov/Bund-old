@@ -33,6 +33,7 @@ func ParserExec(name string, code string) *vm.VM {
 	p.AddErrorListener(errorListener)
 	listener := new(bundExecListener)
 	listener.VM = vm.NewVM(name)
+	errorListener.VM = listener.VM
 	if errorListener.errors > 0 {
 		listener.VM.Error("%v lexer errors detected.", errorListener.errors)
 		return nil

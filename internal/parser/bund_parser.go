@@ -16,7 +16,7 @@ var _ = reflect.Copy
 var _ = strconv.Itoa
 
 var parserATN = []uint16{
-	3, 24715, 42794, 33075, 47597, 16764, 15335, 30598, 22884, 3, 9, 47, 4,
+	3, 24715, 42794, 33075, 47597, 16764, 15335, 30598, 22884, 3, 13, 47, 4,
 	2, 9, 2, 4, 3, 9, 3, 4, 4, 9, 4, 4, 5, 9, 5, 4, 6, 9, 6, 3, 2, 7, 2, 14,
 	10, 2, 12, 2, 14, 2, 17, 11, 2, 3, 3, 3, 3, 5, 3, 21, 10, 3, 3, 4, 3, 4,
 	3, 4, 3, 4, 7, 4, 27, 10, 4, 12, 4, 14, 4, 30, 11, 4, 3, 4, 3, 4, 3, 5,
@@ -40,7 +40,8 @@ var literalNames = []string{
 	"", "'['", "':'", "';;'", "'('", "')'", "'/'",
 }
 var symbolicNames = []string{
-	"", "", "", "", "", "", "SLASH", "NAME",
+	"", "", "", "", "", "", "SLASH", "NAME", "COMMENT", "BLOCK_COMMENT", "WS",
+	"SHEBANG",
 }
 
 var ruleNames = []string{
@@ -78,14 +79,18 @@ func NewBundParser(input antlr.TokenStream) *BundParser {
 
 // BundParser tokens.
 const (
-	BundParserEOF   = antlr.TokenEOF
-	BundParserT__0  = 1
-	BundParserT__1  = 2
-	BundParserT__2  = 3
-	BundParserT__3  = 4
-	BundParserT__4  = 5
-	BundParserSLASH = 6
-	BundParserNAME  = 7
+	BundParserEOF           = antlr.TokenEOF
+	BundParserT__0          = 1
+	BundParserT__1          = 2
+	BundParserT__2          = 3
+	BundParserT__3          = 4
+	BundParserT__4          = 5
+	BundParserSLASH         = 6
+	BundParserNAME          = 7
+	BundParserCOMMENT       = 8
+	BundParserBLOCK_COMMENT = 9
+	BundParserWS            = 10
+	BundParserSHEBANG       = 11
 )
 
 // BundParser rules.

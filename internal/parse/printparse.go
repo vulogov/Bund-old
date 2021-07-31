@@ -32,7 +32,6 @@ func ParserPrint(code string) {
 	listener := new(bundListener)
 	listener.VM = vm.NewVM("<parser>")
 	errorListener.VM = listener.VM
-	listener.VM.Debug("Code passed on parser print: %v", code)
 	if errorListener.errors > 0 {
 		listener.VM.Error("%v lexer errors detected.", errorListener.errors)
 		return

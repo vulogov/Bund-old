@@ -1,7 +1,7 @@
 package vm
 
 import (
-	"github.com/lrita/cmap"
+	"fmt"
 )
 
 type Elem struct {
@@ -31,4 +31,18 @@ type ElemHandler struct {
 	Duplicate  DupFun
 }
 
-var BundTypes cmap.Cmap
+func (vm *VM) RegisterType(t string, ts ToStringFun, fs FromStringFun, cf CompareFun, df DupFun) bool {
+	if _, ok := vm.Types.Load(t); ok {
+		return true
+	}
+	vm.Types.Store(t, &ElemHandler{Type: t, ToString: ts, FromString: fs, Compare: cf, Duplicate: df})
+	vm.Debug("Register BUND datatype: %v", t)
+	return true
+}
+
+func (vm *VM) GetType(t string) (*ElemHandler, error) {
+	if res, ok := vm.Types.Load(t); ok {
+		return res.(*ElemHandler), nil
+	}
+	return nil, fmt.Errorf("BUND do not have datatype: %v", t)
+}
