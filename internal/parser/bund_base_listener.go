@@ -50,3 +50,9 @@ func (s *BaseBundListener) EnterTerm(ctx *TermContext) {}
 
 // ExitTerm is called when production term is exited.
 func (s *BaseBundListener) ExitTerm(ctx *TermContext) {}
+
+// EnterBoolean_term is called when production boolean_term is entered.
+func (s *BaseBundListener) EnterBoolean_term(ctx *Boolean_termContext) {}
+
+// ExitBoolean_term is called when production boolean_term is exited.
+func (s *BaseBundListener) ExitBoolean_term(ctx *Boolean_termContext) {}

@@ -1,8 +1,8 @@
 package vm
 
 type OpcodeParserFun func(v *VM, args ...interface{})
-type OpcodeInLambdaFun func(v *VM, args ...interface{})
-type OpcodeEvalFun func(v *VM, args ...interface{})
+type OpcodeInLambdaFun func(v *VM, args ...interface{}) (*Elem, error)
+type OpcodeEvalFun func(v *VM, args ...interface{}) (*Elem, error)
 type OpcodeExportFun func(v *VM, args ...interface{})
 type OpcodeImportFun func(v *VM, args ...interface{})
 
@@ -20,6 +20,7 @@ func (vm *VM) RegisterOpcodes() {
 	InitOpcodeNs(vm)
 	InitOpcodeExitNs(vm)
 	InitOpcodeBlock(vm)
+	InitOpcodeBoolean(vm)
 }
 
 func (vm *VM) RegisterOpcode(t string, ip OpcodeParserFun, il OpcodeInLambdaFun, ef OpcodeEvalFun, ex OpcodeExportFun, im OpcodeImportFun) bool {

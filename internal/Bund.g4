@@ -18,11 +18,34 @@ block
   : '(' (body+=term)* ')'
   ;
 
-  term
-    : ( ns
-      | block
-    );
+term
+  : ( ns
+    | block
+    | boolean_term
+  );
 
+boolean_term: VALUE=(TRUE|FALSE)('.(' FUNCTOR=NAME ')')? ;
+
+
+TRUE
+  : 'true'
+  | 'True'
+  | 'TRUE'
+  | 'T'
+  | 'yes'
+  | 'Yes'
+  | 'YES'
+  ;
+
+FALSE
+  : 'false'
+  | 'False'
+  | 'FALSE'
+  | 'F'
+  | 'no'
+  | 'No'
+  | 'NO'
+  ;
 
 SLASH:   '/' ;
 

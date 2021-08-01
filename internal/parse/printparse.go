@@ -4,6 +4,7 @@ import (
 	"github.com/antlr/antlr4/runtime/Go/antlr"
 
 	"github.com/vulogov/Bund/internal/parser"
+	"github.com/vulogov/Bund/internal/stdlib"
 	"github.com/vulogov/Bund/internal/vm"
 )
 
@@ -31,6 +32,7 @@ func ParserPrint(code string) {
 	p.AddErrorListener(errorListener)
 	listener := new(bundListener)
 	listener.VM = vm.NewVM("<parser>")
+	stdlib.InitFUNCTIONS(listener.VM)
 	errorListener.VM = listener.VM
 	if errorListener.errors > 0 {
 		listener.VM.Error("%v lexer errors detected.", errorListener.errors)

@@ -23,6 +23,9 @@ type BundListener interface {
 	// EnterTerm is called when entering the term production.
 	EnterTerm(c *TermContext)
 
+	// EnterBoolean_term is called when entering the boolean_term production.
+	EnterBoolean_term(c *Boolean_termContext)
+
 	// ExitExpressions is called when exiting the expressions production.
 	ExitExpressions(c *ExpressionsContext)
 
@@ -37,4 +40,7 @@ type BundListener interface {
 
 	// ExitTerm is called when exiting the term production.
 	ExitTerm(c *TermContext)
+
+	// ExitBoolean_term is called when exiting the boolean_term production.
+	ExitBoolean_term(c *Boolean_termContext)
 }

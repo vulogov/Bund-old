@@ -16,36 +16,40 @@ var _ = reflect.Copy
 var _ = strconv.Itoa
 
 var parserATN = []uint16{
-	3, 24715, 42794, 33075, 47597, 16764, 15335, 30598, 22884, 3, 13, 47, 4,
-	2, 9, 2, 4, 3, 9, 3, 4, 4, 9, 4, 4, 5, 9, 5, 4, 6, 9, 6, 3, 2, 7, 2, 14,
-	10, 2, 12, 2, 14, 2, 17, 11, 2, 3, 3, 3, 3, 5, 3, 21, 10, 3, 3, 4, 3, 4,
-	3, 4, 3, 4, 7, 4, 27, 10, 4, 12, 4, 14, 4, 30, 11, 4, 3, 4, 3, 4, 3, 5,
-	3, 5, 7, 5, 36, 10, 5, 12, 5, 14, 5, 39, 11, 5, 3, 5, 3, 5, 3, 6, 3, 6,
-	5, 6, 45, 10, 6, 3, 6, 2, 2, 7, 2, 4, 6, 8, 10, 2, 2, 2, 46, 2, 15, 3,
-	2, 2, 2, 4, 20, 3, 2, 2, 2, 6, 22, 3, 2, 2, 2, 8, 33, 3, 2, 2, 2, 10, 44,
-	3, 2, 2, 2, 12, 14, 5, 4, 3, 2, 13, 12, 3, 2, 2, 2, 14, 17, 3, 2, 2, 2,
-	15, 13, 3, 2, 2, 2, 15, 16, 3, 2, 2, 2, 16, 3, 3, 2, 2, 2, 17, 15, 3, 2,
-	2, 2, 18, 21, 5, 6, 4, 2, 19, 21, 5, 8, 5, 2, 20, 18, 3, 2, 2, 2, 20, 19,
-	3, 2, 2, 2, 21, 5, 3, 2, 2, 2, 22, 23, 7, 3, 2, 2, 23, 24, 7, 9, 2, 2,
-	24, 28, 7, 4, 2, 2, 25, 27, 5, 10, 6, 2, 26, 25, 3, 2, 2, 2, 27, 30, 3,
-	2, 2, 2, 28, 26, 3, 2, 2, 2, 28, 29, 3, 2, 2, 2, 29, 31, 3, 2, 2, 2, 30,
-	28, 3, 2, 2, 2, 31, 32, 7, 5, 2, 2, 32, 7, 3, 2, 2, 2, 33, 37, 7, 6, 2,
-	2, 34, 36, 5, 10, 6, 2, 35, 34, 3, 2, 2, 2, 36, 39, 3, 2, 2, 2, 37, 35,
-	3, 2, 2, 2, 37, 38, 3, 2, 2, 2, 38, 40, 3, 2, 2, 2, 39, 37, 3, 2, 2, 2,
-	40, 41, 7, 7, 2, 2, 41, 9, 3, 2, 2, 2, 42, 45, 5, 6, 4, 2, 43, 45, 5, 8,
-	5, 2, 44, 42, 3, 2, 2, 2, 44, 43, 3, 2, 2, 2, 45, 11, 3, 2, 2, 2, 7, 15,
-	20, 28, 37, 44,
+	3, 24715, 42794, 33075, 47597, 16764, 15335, 30598, 22884, 3, 16, 56, 4,
+	2, 9, 2, 4, 3, 9, 3, 4, 4, 9, 4, 4, 5, 9, 5, 4, 6, 9, 6, 4, 7, 9, 7, 3,
+	2, 7, 2, 16, 10, 2, 12, 2, 14, 2, 19, 11, 2, 3, 3, 3, 3, 5, 3, 23, 10,
+	3, 3, 4, 3, 4, 3, 4, 3, 4, 7, 4, 29, 10, 4, 12, 4, 14, 4, 32, 11, 4, 3,
+	4, 3, 4, 3, 5, 3, 5, 7, 5, 38, 10, 5, 12, 5, 14, 5, 41, 11, 5, 3, 5, 3,
+	5, 3, 6, 3, 6, 3, 6, 5, 6, 48, 10, 6, 3, 7, 3, 7, 3, 7, 3, 7, 5, 7, 54,
+	10, 7, 3, 7, 2, 2, 8, 2, 4, 6, 8, 10, 12, 2, 3, 3, 2, 9, 10, 2, 56, 2,
+	17, 3, 2, 2, 2, 4, 22, 3, 2, 2, 2, 6, 24, 3, 2, 2, 2, 8, 35, 3, 2, 2, 2,
+	10, 47, 3, 2, 2, 2, 12, 49, 3, 2, 2, 2, 14, 16, 5, 4, 3, 2, 15, 14, 3,
+	2, 2, 2, 16, 19, 3, 2, 2, 2, 17, 15, 3, 2, 2, 2, 17, 18, 3, 2, 2, 2, 18,
+	3, 3, 2, 2, 2, 19, 17, 3, 2, 2, 2, 20, 23, 5, 6, 4, 2, 21, 23, 5, 8, 5,
+	2, 22, 20, 3, 2, 2, 2, 22, 21, 3, 2, 2, 2, 23, 5, 3, 2, 2, 2, 24, 25, 7,
+	3, 2, 2, 25, 26, 7, 12, 2, 2, 26, 30, 7, 4, 2, 2, 27, 29, 5, 10, 6, 2,
+	28, 27, 3, 2, 2, 2, 29, 32, 3, 2, 2, 2, 30, 28, 3, 2, 2, 2, 30, 31, 3,
+	2, 2, 2, 31, 33, 3, 2, 2, 2, 32, 30, 3, 2, 2, 2, 33, 34, 7, 5, 2, 2, 34,
+	7, 3, 2, 2, 2, 35, 39, 7, 6, 2, 2, 36, 38, 5, 10, 6, 2, 37, 36, 3, 2, 2,
+	2, 38, 41, 3, 2, 2, 2, 39, 37, 3, 2, 2, 2, 39, 40, 3, 2, 2, 2, 40, 42,
+	3, 2, 2, 2, 41, 39, 3, 2, 2, 2, 42, 43, 7, 7, 2, 2, 43, 9, 3, 2, 2, 2,
+	44, 48, 5, 6, 4, 2, 45, 48, 5, 8, 5, 2, 46, 48, 5, 12, 7, 2, 47, 44, 3,
+	2, 2, 2, 47, 45, 3, 2, 2, 2, 47, 46, 3, 2, 2, 2, 48, 11, 3, 2, 2, 2, 49,
+	53, 9, 2, 2, 2, 50, 51, 7, 8, 2, 2, 51, 52, 7, 12, 2, 2, 52, 54, 7, 7,
+	2, 2, 53, 50, 3, 2, 2, 2, 53, 54, 3, 2, 2, 2, 54, 13, 3, 2, 2, 2, 8, 17,
+	22, 30, 39, 47, 53,
 }
 var literalNames = []string{
-	"", "'['", "':'", "';;'", "'('", "')'", "'/'",
+	"", "'['", "':'", "';;'", "'('", "')'", "'.('", "", "", "'/'",
 }
 var symbolicNames = []string{
-	"", "", "", "", "", "", "SLASH", "NAME", "COMMENT", "BLOCK_COMMENT", "WS",
-	"SHEBANG",
+	"", "", "", "", "", "", "", "TRUE", "FALSE", "SLASH", "NAME", "COMMENT",
+	"BLOCK_COMMENT", "WS", "SHEBANG",
 }
 
 var ruleNames = []string{
-	"expressions", "root_term", "ns", "block", "term",
+	"expressions", "root_term", "ns", "block", "term", "boolean_term",
 }
 
 type BundParser struct {
@@ -85,21 +89,25 @@ const (
 	BundParserT__2          = 3
 	BundParserT__3          = 4
 	BundParserT__4          = 5
-	BundParserSLASH         = 6
-	BundParserNAME          = 7
-	BundParserCOMMENT       = 8
-	BundParserBLOCK_COMMENT = 9
-	BundParserWS            = 10
-	BundParserSHEBANG       = 11
+	BundParserT__5          = 6
+	BundParserTRUE          = 7
+	BundParserFALSE         = 8
+	BundParserSLASH         = 9
+	BundParserNAME          = 10
+	BundParserCOMMENT       = 11
+	BundParserBLOCK_COMMENT = 12
+	BundParserWS            = 13
+	BundParserSHEBANG       = 14
 )
 
 // BundParser rules.
 const (
-	BundParserRULE_expressions = 0
-	BundParserRULE_root_term   = 1
-	BundParserRULE_ns          = 2
-	BundParserRULE_block       = 3
-	BundParserRULE_term        = 4
+	BundParserRULE_expressions  = 0
+	BundParserRULE_root_term    = 1
+	BundParserRULE_ns           = 2
+	BundParserRULE_block        = 3
+	BundParserRULE_term         = 4
+	BundParserRULE_boolean_term = 5
 )
 
 // IExpressionsContext is an interface to support dynamic dispatch.
@@ -205,17 +213,17 @@ func (p *BundParser) Expressions() (localctx IExpressionsContext) {
 	}()
 
 	p.EnterOuterAlt(localctx, 1)
-	p.SetState(13)
+	p.SetState(15)
 	p.GetErrorHandler().Sync(p)
 	_la = p.GetTokenStream().LA(1)
 
 	for _la == BundParserT__0 || _la == BundParserT__3 {
 		{
-			p.SetState(10)
+			p.SetState(12)
 			p.Root_term()
 		}
 
-		p.SetState(15)
+		p.SetState(17)
 		p.GetErrorHandler().Sync(p)
 		_la = p.GetTokenStream().LA(1)
 	}
@@ -322,19 +330,19 @@ func (p *BundParser) Root_term() (localctx IRoot_termContext) {
 	}()
 
 	p.EnterOuterAlt(localctx, 1)
-	p.SetState(18)
+	p.SetState(20)
 	p.GetErrorHandler().Sync(p)
 
 	switch p.GetTokenStream().LA(1) {
 	case BundParserT__0:
 		{
-			p.SetState(16)
+			p.SetState(18)
 			p.Ns()
 		}
 
 	case BundParserT__3:
 		{
-			p.SetState(17)
+			p.SetState(19)
 			p.Block()
 		}
 
@@ -486,27 +494,27 @@ func (p *BundParser) Ns() (localctx INsContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(20)
+		p.SetState(22)
 		p.Match(BundParserT__0)
 	}
 	{
-		p.SetState(21)
+		p.SetState(23)
 
 		var _m = p.Match(BundParserNAME)
 
 		localctx.(*NsContext).name = _m
 	}
 	{
-		p.SetState(22)
+		p.SetState(24)
 		p.Match(BundParserT__1)
 	}
-	p.SetState(26)
+	p.SetState(28)
 	p.GetErrorHandler().Sync(p)
 	_la = p.GetTokenStream().LA(1)
 
-	for _la == BundParserT__0 || _la == BundParserT__3 {
+	for ((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<BundParserT__0)|(1<<BundParserT__3)|(1<<BundParserTRUE)|(1<<BundParserFALSE))) != 0 {
 		{
-			p.SetState(23)
+			p.SetState(25)
 
 			var _x = p.Term()
 
@@ -514,12 +522,12 @@ func (p *BundParser) Ns() (localctx INsContext) {
 		}
 		localctx.(*NsContext).body = append(localctx.(*NsContext).body, localctx.(*NsContext)._term)
 
-		p.SetState(28)
+		p.SetState(30)
 		p.GetErrorHandler().Sync(p)
 		_la = p.GetTokenStream().LA(1)
 	}
 	{
-		p.SetState(29)
+		p.SetState(31)
 		p.Match(BundParserT__2)
 	}
 
@@ -652,16 +660,16 @@ func (p *BundParser) Block() (localctx IBlockContext) {
 
 	p.EnterOuterAlt(localctx, 1)
 	{
-		p.SetState(31)
+		p.SetState(33)
 		p.Match(BundParserT__3)
 	}
-	p.SetState(35)
+	p.SetState(37)
 	p.GetErrorHandler().Sync(p)
 	_la = p.GetTokenStream().LA(1)
 
-	for _la == BundParserT__0 || _la == BundParserT__3 {
+	for ((_la)&-(0x1f+1)) == 0 && ((1<<uint(_la))&((1<<BundParserT__0)|(1<<BundParserT__3)|(1<<BundParserTRUE)|(1<<BundParserFALSE))) != 0 {
 		{
-			p.SetState(32)
+			p.SetState(34)
 
 			var _x = p.Term()
 
@@ -669,12 +677,12 @@ func (p *BundParser) Block() (localctx IBlockContext) {
 		}
 		localctx.(*BlockContext).body = append(localctx.(*BlockContext).body, localctx.(*BlockContext)._term)
 
-		p.SetState(37)
+		p.SetState(39)
 		p.GetErrorHandler().Sync(p)
 		_la = p.GetTokenStream().LA(1)
 	}
 	{
-		p.SetState(38)
+		p.SetState(40)
 		p.Match(BundParserT__4)
 	}
 
@@ -739,6 +747,16 @@ func (s *TermContext) Block() IBlockContext {
 	return t.(IBlockContext)
 }
 
+func (s *TermContext) Boolean_term() IBoolean_termContext {
+	var t = s.GetTypedRuleContext(reflect.TypeOf((*IBoolean_termContext)(nil)).Elem(), 0)
+
+	if t == nil {
+		return nil
+	}
+
+	return t.(IBoolean_termContext)
+}
+
 func (s *TermContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
@@ -780,24 +798,188 @@ func (p *BundParser) Term() (localctx ITermContext) {
 	}()
 
 	p.EnterOuterAlt(localctx, 1)
-	p.SetState(42)
+	p.SetState(45)
 	p.GetErrorHandler().Sync(p)
 
 	switch p.GetTokenStream().LA(1) {
 	case BundParserT__0:
 		{
-			p.SetState(40)
+			p.SetState(42)
 			p.Ns()
 		}
 
 	case BundParserT__3:
 		{
-			p.SetState(41)
+			p.SetState(43)
 			p.Block()
+		}
+
+	case BundParserTRUE, BundParserFALSE:
+		{
+			p.SetState(44)
+			p.Boolean_term()
 		}
 
 	default:
 		panic(antlr.NewNoViableAltException(p, nil, nil, nil, nil, nil))
+	}
+
+	return localctx
+}
+
+// IBoolean_termContext is an interface to support dynamic dispatch.
+type IBoolean_termContext interface {
+	antlr.ParserRuleContext
+
+	// GetParser returns the parser.
+	GetParser() antlr.Parser
+
+	// GetVALUE returns the VALUE token.
+	GetVALUE() antlr.Token
+
+	// GetFUNCTOR returns the FUNCTOR token.
+	GetFUNCTOR() antlr.Token
+
+	// SetVALUE sets the VALUE token.
+	SetVALUE(antlr.Token)
+
+	// SetFUNCTOR sets the FUNCTOR token.
+	SetFUNCTOR(antlr.Token)
+
+	// IsBoolean_termContext differentiates from other interfaces.
+	IsBoolean_termContext()
+}
+
+type Boolean_termContext struct {
+	*antlr.BaseParserRuleContext
+	parser  antlr.Parser
+	VALUE   antlr.Token
+	FUNCTOR antlr.Token
+}
+
+func NewEmptyBoolean_termContext() *Boolean_termContext {
+	var p = new(Boolean_termContext)
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(nil, -1)
+	p.RuleIndex = BundParserRULE_boolean_term
+	return p
+}
+
+func (*Boolean_termContext) IsBoolean_termContext() {}
+
+func NewBoolean_termContext(parser antlr.Parser, parent antlr.ParserRuleContext, invokingState int) *Boolean_termContext {
+	var p = new(Boolean_termContext)
+
+	p.BaseParserRuleContext = antlr.NewBaseParserRuleContext(parent, invokingState)
+
+	p.parser = parser
+	p.RuleIndex = BundParserRULE_boolean_term
+
+	return p
+}
+
+func (s *Boolean_termContext) GetParser() antlr.Parser { return s.parser }
+
+func (s *Boolean_termContext) GetVALUE() antlr.Token { return s.VALUE }
+
+func (s *Boolean_termContext) GetFUNCTOR() antlr.Token { return s.FUNCTOR }
+
+func (s *Boolean_termContext) SetVALUE(v antlr.Token) { s.VALUE = v }
+
+func (s *Boolean_termContext) SetFUNCTOR(v antlr.Token) { s.FUNCTOR = v }
+
+func (s *Boolean_termContext) TRUE() antlr.TerminalNode {
+	return s.GetToken(BundParserTRUE, 0)
+}
+
+func (s *Boolean_termContext) FALSE() antlr.TerminalNode {
+	return s.GetToken(BundParserFALSE, 0)
+}
+
+func (s *Boolean_termContext) NAME() antlr.TerminalNode {
+	return s.GetToken(BundParserNAME, 0)
+}
+
+func (s *Boolean_termContext) GetRuleContext() antlr.RuleContext {
+	return s
+}
+
+func (s *Boolean_termContext) ToStringTree(ruleNames []string, recog antlr.Recognizer) string {
+	return antlr.TreesStringTree(s, ruleNames, recog)
+}
+
+func (s *Boolean_termContext) EnterRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(BundListener); ok {
+		listenerT.EnterBoolean_term(s)
+	}
+}
+
+func (s *Boolean_termContext) ExitRule(listener antlr.ParseTreeListener) {
+	if listenerT, ok := listener.(BundListener); ok {
+		listenerT.ExitBoolean_term(s)
+	}
+}
+
+func (p *BundParser) Boolean_term() (localctx IBoolean_termContext) {
+	localctx = NewBoolean_termContext(p, p.GetParserRuleContext(), p.GetState())
+	p.EnterRule(localctx, 10, BundParserRULE_boolean_term)
+	var _la int
+
+	defer func() {
+		p.ExitRule()
+	}()
+
+	defer func() {
+		if err := recover(); err != nil {
+			if v, ok := err.(antlr.RecognitionException); ok {
+				localctx.SetException(v)
+				p.GetErrorHandler().ReportError(p, v)
+				p.GetErrorHandler().Recover(p, v)
+			} else {
+				panic(err)
+			}
+		}
+	}()
+
+	p.EnterOuterAlt(localctx, 1)
+	{
+		p.SetState(47)
+
+		var _lt = p.GetTokenStream().LT(1)
+
+		localctx.(*Boolean_termContext).VALUE = _lt
+
+		_la = p.GetTokenStream().LA(1)
+
+		if !(_la == BundParserTRUE || _la == BundParserFALSE) {
+			var _ri = p.GetErrorHandler().RecoverInline(p)
+
+			localctx.(*Boolean_termContext).VALUE = _ri
+		} else {
+			p.GetErrorHandler().ReportMatch(p)
+			p.Consume()
+		}
+	}
+	p.SetState(51)
+	p.GetErrorHandler().Sync(p)
+	_la = p.GetTokenStream().LA(1)
+
+	if _la == BundParserT__5 {
+		{
+			p.SetState(48)
+			p.Match(BundParserT__5)
+		}
+		{
+			p.SetState(49)
+
+			var _m = p.Match(BundParserNAME)
+
+			localctx.(*Boolean_termContext).FUNCTOR = _m
+		}
+		{
+			p.SetState(50)
+			p.Match(BundParserT__4)
+		}
+
 	}
 
 	return localctx
