@@ -65,6 +65,9 @@ type BundListener interface {
 	// EnterDatablock_term is called when entering the datablock_term production.
 	EnterDatablock_term(c *Datablock_termContext)
 
+	// EnterMatchblock_term is called when entering the matchblock_term production.
+	EnterMatchblock_term(c *Matchblock_termContext)
+
 	// ExitExpressions is called when exiting the expressions production.
 	ExitExpressions(c *ExpressionsContext)
 
@@ -121,4 +124,7 @@ type BundListener interface {
 
 	// ExitDatablock_term is called when exiting the datablock_term production.
 	ExitDatablock_term(c *Datablock_termContext)
+
+	// ExitMatchblock_term is called when exiting the matchblock_term production.
+	ExitMatchblock_term(c *Matchblock_termContext)
 }

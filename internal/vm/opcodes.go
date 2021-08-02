@@ -31,6 +31,7 @@ func (vm *VM) RegisterOpcodes() {
 	InitOpcodeRCall(vm)
 	InitOpcodeRop(vm)
 	InitOpcodeDBlock(vm)
+	InitOpcodeMBlock(vm)
 	InitOpcodeSeparate(vm)
 	InitOpcodeGlob(vm)
 }

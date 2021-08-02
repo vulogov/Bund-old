@@ -134,3 +134,9 @@ func (s *BaseBundListener) EnterDatablock_term(ctx *Datablock_termContext) {}
 
 // ExitDatablock_term is called when production datablock_term is exited.
 func (s *BaseBundListener) ExitDatablock_term(ctx *Datablock_termContext) {}
+
+// EnterMatchblock_term is called when production matchblock_term is entered.
+func (s *BaseBundListener) EnterMatchblock_term(ctx *Matchblock_termContext) {}
+
+// ExitMatchblock_term is called when production matchblock_term is exited.
+func (s *BaseBundListener) ExitMatchblock_term(ctx *Matchblock_termContext) {}

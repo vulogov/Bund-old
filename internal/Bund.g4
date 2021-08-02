@@ -32,6 +32,7 @@ term
     | complex_term
     | glob_term
     | datablock_term
+    | matchblock_term
     | mode_term
     | separate_term
   );
@@ -45,6 +46,7 @@ data
     | call_term
     | operator_term
     | separate_term
+    | glob_term
   );
 
 call_term
@@ -73,6 +75,9 @@ datablock_term
   : '(*' (body+=data)* ')'('.(' FUNCTOR=(SYS|NAME) ')')?
   ;
 
+matchblock_term
+  : '(?' (body+=data)+ ')'
+  ;
 
 INTEGER
   :  (SIGN)? DECIMAL_INTEGER
