@@ -18,3 +18,16 @@ func NewNS(v *VM, name string) *NS {
 	v.Debug("Creating NAMESPACE: %v", name)
 	return &NS{Name: name, VM: v}
 }
+
+func (ns *NS) SetOption(key string, val interface{}) {
+	ns.VM.Debug("NS(%s) OPTION %v=%v ", ns.Name, key, val)
+	ns.Options.Store(key, val)
+}
+
+func (ns *NS) GetOption(key string, deflt interface{}) interface{} {
+	ns.VM.Debug("NS(%s) OPTION-GET %v ", ns.Name, key)
+	if res, ok := ns.Options.Load(key); ok {
+		return res
+	}
+	return deflt
+}

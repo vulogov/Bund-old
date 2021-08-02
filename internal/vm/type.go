@@ -8,4 +8,6 @@ func (vm *VM) RegisterTypes() {
 	RegisterString(vm)
 	RegisterCpx(vm)
 	RegisterCALL(vm)
+	RegisterDblock(vm)
+	RegisterSep(vm)
 }
