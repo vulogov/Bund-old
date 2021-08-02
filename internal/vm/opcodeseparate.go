@@ -11,7 +11,7 @@ func SeparateEval(vm *VM, args ...interface{}) (*Elem, error) {
 		val = &Elem{Type: "SEPARATE", Value: nil}
 	} else {
 		vm.Debug("SEPARATE command")
-		// val = vm.Separate()
+		val = vm.Separate()
 	}
 	return val, nil
 }
