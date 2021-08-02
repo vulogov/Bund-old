@@ -12,6 +12,9 @@ func (vm *VM) RunOp(t string, args ...interface{}) {
 		if len(args) == 2 && len(args[1].(string)) > 0 {
 			functor := args[1].(string)
 			res_eval, err := vm.Opcode(t).InEval(vm, args...)
+			if err != nil {
+				vm.OnError(err, "Error in function application before functor: %v", args[0])
+			}
 			fun, err := vm.GetFunction(functor)
 			if err == nil {
 				vm.Debug("Functor execution for %v(%v)", t, functor)

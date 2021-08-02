@@ -51,8 +51,80 @@ func (s *BaseBundListener) EnterTerm(ctx *TermContext) {}
 // ExitTerm is called when production term is exited.
 func (s *BaseBundListener) ExitTerm(ctx *TermContext) {}
 
+// EnterData is called when production data is entered.
+func (s *BaseBundListener) EnterData(ctx *DataContext) {}
+
+// ExitData is called when production data is exited.
+func (s *BaseBundListener) ExitData(ctx *DataContext) {}
+
+// EnterCall_term is called when production call_term is entered.
+func (s *BaseBundListener) EnterCall_term(ctx *Call_termContext) {}
+
+// ExitCall_term is called when production call_term is exited.
+func (s *BaseBundListener) ExitCall_term(ctx *Call_termContext) {}
+
+// EnterOperator_term is called when production operator_term is entered.
+func (s *BaseBundListener) EnterOperator_term(ctx *Operator_termContext) {}
+
+// ExitOperator_term is called when production operator_term is exited.
+func (s *BaseBundListener) ExitOperator_term(ctx *Operator_termContext) {}
+
+// EnterRef_call_term is called when production ref_call_term is entered.
+func (s *BaseBundListener) EnterRef_call_term(ctx *Ref_call_termContext) {}
+
+// ExitRef_call_term is called when production ref_call_term is exited.
+func (s *BaseBundListener) ExitRef_call_term(ctx *Ref_call_termContext) {}
+
+// EnterRef_operator_term is called when production ref_operator_term is entered.
+func (s *BaseBundListener) EnterRef_operator_term(ctx *Ref_operator_termContext) {}
+
+// ExitRef_operator_term is called when production ref_operator_term is exited.
+func (s *BaseBundListener) ExitRef_operator_term(ctx *Ref_operator_termContext) {}
+
 // EnterBoolean_term is called when production boolean_term is entered.
 func (s *BaseBundListener) EnterBoolean_term(ctx *Boolean_termContext) {}
 
 // ExitBoolean_term is called when production boolean_term is exited.
 func (s *BaseBundListener) ExitBoolean_term(ctx *Boolean_termContext) {}
+
+// EnterInteger_term is called when production integer_term is entered.
+func (s *BaseBundListener) EnterInteger_term(ctx *Integer_termContext) {}
+
+// ExitInteger_term is called when production integer_term is exited.
+func (s *BaseBundListener) ExitInteger_term(ctx *Integer_termContext) {}
+
+// EnterFloat_term is called when production float_term is entered.
+func (s *BaseBundListener) EnterFloat_term(ctx *Float_termContext) {}
+
+// ExitFloat_term is called when production float_term is exited.
+func (s *BaseBundListener) ExitFloat_term(ctx *Float_termContext) {}
+
+// EnterString_term is called when production string_term is entered.
+func (s *BaseBundListener) EnterString_term(ctx *String_termContext) {}
+
+// ExitString_term is called when production string_term is exited.
+func (s *BaseBundListener) ExitString_term(ctx *String_termContext) {}
+
+// EnterComplex_term is called when production complex_term is entered.
+func (s *BaseBundListener) EnterComplex_term(ctx *Complex_termContext) {}
+
+// ExitComplex_term is called when production complex_term is exited.
+func (s *BaseBundListener) ExitComplex_term(ctx *Complex_termContext) {}
+
+// EnterMode_term is called when production mode_term is entered.
+func (s *BaseBundListener) EnterMode_term(ctx *Mode_termContext) {}
+
+// ExitMode_term is called when production mode_term is exited.
+func (s *BaseBundListener) ExitMode_term(ctx *Mode_termContext) {}
+
+// EnterSeparate_term is called when production separate_term is entered.
+func (s *BaseBundListener) EnterSeparate_term(ctx *Separate_termContext) {}
+
+// ExitSeparate_term is called when production separate_term is exited.
+func (s *BaseBundListener) ExitSeparate_term(ctx *Separate_termContext) {}
+
+// EnterDatablock_term is called when production datablock_term is entered.
+func (s *BaseBundListener) EnterDatablock_term(ctx *Datablock_termContext) {}
+
+// ExitDatablock_term is called when production datablock_term is exited.
+func (s *BaseBundListener) ExitDatablock_term(ctx *Datablock_termContext) {}

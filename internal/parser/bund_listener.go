@@ -23,8 +23,44 @@ type BundListener interface {
 	// EnterTerm is called when entering the term production.
 	EnterTerm(c *TermContext)
 
+	// EnterData is called when entering the data production.
+	EnterData(c *DataContext)
+
+	// EnterCall_term is called when entering the call_term production.
+	EnterCall_term(c *Call_termContext)
+
+	// EnterOperator_term is called when entering the operator_term production.
+	EnterOperator_term(c *Operator_termContext)
+
+	// EnterRef_call_term is called when entering the ref_call_term production.
+	EnterRef_call_term(c *Ref_call_termContext)
+
+	// EnterRef_operator_term is called when entering the ref_operator_term production.
+	EnterRef_operator_term(c *Ref_operator_termContext)
+
 	// EnterBoolean_term is called when entering the boolean_term production.
 	EnterBoolean_term(c *Boolean_termContext)
+
+	// EnterInteger_term is called when entering the integer_term production.
+	EnterInteger_term(c *Integer_termContext)
+
+	// EnterFloat_term is called when entering the float_term production.
+	EnterFloat_term(c *Float_termContext)
+
+	// EnterString_term is called when entering the string_term production.
+	EnterString_term(c *String_termContext)
+
+	// EnterComplex_term is called when entering the complex_term production.
+	EnterComplex_term(c *Complex_termContext)
+
+	// EnterMode_term is called when entering the mode_term production.
+	EnterMode_term(c *Mode_termContext)
+
+	// EnterSeparate_term is called when entering the separate_term production.
+	EnterSeparate_term(c *Separate_termContext)
+
+	// EnterDatablock_term is called when entering the datablock_term production.
+	EnterDatablock_term(c *Datablock_termContext)
 
 	// ExitExpressions is called when exiting the expressions production.
 	ExitExpressions(c *ExpressionsContext)
@@ -41,6 +77,42 @@ type BundListener interface {
 	// ExitTerm is called when exiting the term production.
 	ExitTerm(c *TermContext)
 
+	// ExitData is called when exiting the data production.
+	ExitData(c *DataContext)
+
+	// ExitCall_term is called when exiting the call_term production.
+	ExitCall_term(c *Call_termContext)
+
+	// ExitOperator_term is called when exiting the operator_term production.
+	ExitOperator_term(c *Operator_termContext)
+
+	// ExitRef_call_term is called when exiting the ref_call_term production.
+	ExitRef_call_term(c *Ref_call_termContext)
+
+	// ExitRef_operator_term is called when exiting the ref_operator_term production.
+	ExitRef_operator_term(c *Ref_operator_termContext)
+
 	// ExitBoolean_term is called when exiting the boolean_term production.
 	ExitBoolean_term(c *Boolean_termContext)
+
+	// ExitInteger_term is called when exiting the integer_term production.
+	ExitInteger_term(c *Integer_termContext)
+
+	// ExitFloat_term is called when exiting the float_term production.
+	ExitFloat_term(c *Float_termContext)
+
+	// ExitString_term is called when exiting the string_term production.
+	ExitString_term(c *String_termContext)
+
+	// ExitComplex_term is called when exiting the complex_term production.
+	ExitComplex_term(c *Complex_termContext)
+
+	// ExitMode_term is called when exiting the mode_term production.
+	ExitMode_term(c *Mode_termContext)
+
+	// ExitSeparate_term is called when exiting the separate_term production.
+	ExitSeparate_term(c *Separate_termContext)
+
+	// ExitDatablock_term is called when exiting the datablock_term production.
+	ExitDatablock_term(c *Datablock_termContext)
 }
