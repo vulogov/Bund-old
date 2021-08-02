@@ -10,4 +10,5 @@ func InitFUNCTIONS(vm *vmmod.VM) {
 	InitSystemFunctions(vm)
 	InitReturnFunctions(vm)
 	InitOpMath(vm)
+	InitOpCmp(vm)
 }
