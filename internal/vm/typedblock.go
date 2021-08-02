@@ -34,14 +34,24 @@ func DblockFromString(vm *VM, d string) *Elem {
 }
 
 func DblockCompare(vm *VM, e1 *Elem, e2 *Elem) int {
-	return IDK
+	if DblockSameArity(vm, e1, e2) {
+		return Eq
+	}
+	return Ne
 }
 
 func DblockDup(vm *VM, e *Elem) *Elem {
 	if e.Type != "dblock" {
 		return nil
 	}
-	return &Elem{Type: "dblock", Value: e.Value}
+	res := DblockFactory(vm)
+	q1 := e.Value.(*deque.Deque)
+	q2 := res.Value.(*deque.Deque)
+	for i := 0; i < q1.Len(); i++ {
+		e := q1.At(i).(*Elem)
+		q2.PushBack(e)
+	}
+	return res
 }
 
 func RegisterDblock(vm *VM) {

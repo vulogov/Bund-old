@@ -53,6 +53,9 @@ type BundListener interface {
 	// EnterComplex_term is called when entering the complex_term production.
 	EnterComplex_term(c *Complex_termContext)
 
+	// EnterGlob_term is called when entering the glob_term production.
+	EnterGlob_term(c *Glob_termContext)
+
 	// EnterMode_term is called when entering the mode_term production.
 	EnterMode_term(c *Mode_termContext)
 
@@ -106,6 +109,9 @@ type BundListener interface {
 
 	// ExitComplex_term is called when exiting the complex_term production.
 	ExitComplex_term(c *Complex_termContext)
+
+	// ExitGlob_term is called when exiting the glob_term production.
+	ExitGlob_term(c *Glob_termContext)
 
 	// ExitMode_term is called when exiting the mode_term production.
 	ExitMode_term(c *Mode_termContext)

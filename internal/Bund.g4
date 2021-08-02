@@ -30,6 +30,7 @@ term
     | float_term
     | string_term
     | complex_term
+    | glob_term
     | datablock_term
     | mode_term
     | separate_term
@@ -62,6 +63,7 @@ integer_term: VALUE=INTEGER('.(' FUNCTOR=(SYSF|NAME) ')')? ;
 float_term:   VALUE=FLOAT_NUMBER('.(' FUNCTOR=(SYSF|NAME) ')')? ;
 string_term:  VALUE=STRING('.(' FUNCTOR=(SYSF|NAME) ')')? ;
 complex_term: VALUE=COMPLEX_NUMBER('.(' FUNCTOR=(SYSF|NAME) ')')? ;
+glob_term:    VALUE=GLOB('.(' FUNCTOR=(SYSF|NAME) ')')? ;
 
 mode_term:    VALUE=(TOBEGIN|TOEND) ;
 
@@ -135,6 +137,10 @@ NAME
 TOBEGIN: ':' ;
 TOEND:   ';' ;
 
+GLOB
+  : GLOB_PATTERN
+  ;
+
 SEPARATE
   : '|'
   ;
@@ -179,6 +185,11 @@ fragment POINT_FLOAT
   | [0-9]+ '.'
   ;
 
+fragment GLOB_PATTERN
+  : 'g\'' ('\\' (RN | .) | ~[\\\r\n'])* '\''
+  | 'g"'  ('\\' (RN | .) | ~[\\\r\n"])* '"'
+  ;
+
 fragment RN
   : '\r'? '\n'
   ;
@@ -197,12 +208,6 @@ fragment LONG_STRING_ITEM
   : ~'\\'
   | '\\' (RN | .)
   ;
-
-fragment GLOB_PATTERN
-  : 'g\'' ('\\' (RN | .) | ~[\\\r\n'])* '\''
-  | 'g"'  ('\\' (RN | .) | ~[\\\r\n"])* '"'
-  ;
-
 
 fragment ID_START
  : ([A-Z]|[a-z]|SLASH)

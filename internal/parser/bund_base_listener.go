@@ -111,6 +111,12 @@ func (s *BaseBundListener) EnterComplex_term(ctx *Complex_termContext) {}
 // ExitComplex_term is called when production complex_term is exited.
 func (s *BaseBundListener) ExitComplex_term(ctx *Complex_termContext) {}
 
+// EnterGlob_term is called when production glob_term is entered.
+func (s *BaseBundListener) EnterGlob_term(ctx *Glob_termContext) {}
+
+// ExitGlob_term is called when production glob_term is exited.
+func (s *BaseBundListener) ExitGlob_term(ctx *Glob_termContext) {}
+
 // EnterMode_term is called when production mode_term is entered.
 func (s *BaseBundListener) EnterMode_term(ctx *Mode_termContext) {}
 
