@@ -34,7 +34,7 @@ func DblockFromString(vm *VM, d string) *Elem {
 }
 
 func DblockCompare(vm *VM, e1 *Elem, e2 *Elem) int {
-	if DblockSameArity(vm, e1, e2) {
+	if DblockSame(vm, e1, e2) {
 		return Eq
 	}
 	return Ne

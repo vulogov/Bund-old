@@ -5,7 +5,7 @@ go 1.16
 require (
 	github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751 // indirect
 	github.com/alecthomas/units v0.0.0-20190717042225-c3de453c63f4 // indirect
-	github.com/antlr/antlr4/runtime/Go/antlr v0.0.0-20210716071054-a231a1a7f1cc
+	github.com/antlr/antlr4/runtime/Go/antlr v0.0.0-20210803070921-b358b509191a
 	github.com/common-nighthawk/go-figure v0.0.0-20210622060536-734e95fb86be
 	github.com/cstockton/go-conv v0.0.0-20170524002450-66a2b2ba36e1
 	github.com/davecgh/go-spew v1.1.1 // indirect

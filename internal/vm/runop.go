@@ -1,13 +1,9 @@
 package vm
 
-// "fmt"
-
-func (vm *VM) RunOp(t string, args ...interface{}) {
+func (vm *VM) runop(t string, args ...interface{}) {
 	var res *Elem
 	var err error
-	if vm.CheckIgnore() {
-		return
-	}
+
 	if !vm.InLambda() {
 		if len(args) == 2 && len(args[1].(string)) > 0 {
 			functor := args[1].(string)
@@ -46,4 +42,15 @@ func (vm *VM) RunOp(t string, args ...interface{}) {
 			}
 		}
 	}
+}
+
+func (vm *VM) RunOp(t string, args ...interface{}) {
+	if vm.CheckIgnore() {
+		return
+	}
+	vm.runop(t, args...)
+}
+
+func (vm *VM) AlwaysRunOp(t string, args ...interface{}) {
+	vm.runop(t, args...)
 }

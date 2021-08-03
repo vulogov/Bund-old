@@ -33,6 +33,7 @@ term
     | glob_term
     | datablock_term
     | matchblock_term
+    | logicblock_term
     | mode_term
     | separate_term
   );
@@ -77,6 +78,10 @@ datablock_term
 
 matchblock_term
   : '(?' (body+=data)+ ')'
+  ;
+
+logicblock_term
+  : HDR=('(true'|'(false') (body+=term)* ')'
   ;
 
 INTEGER
