@@ -70,6 +70,17 @@ func Apply(name string, vm *VM) error {
 			} else {
 				vm.Fatal("Unknown OPCODE: %v", cmd.Type)
 			}
+		case "SEPARATE":
+			oh := vm.Opcode("SEPARATE")
+			if oh != nil {
+				res, err := oh.InEval(vm)
+				vm.OnError(err, "Error in EVAL")
+				if res != nil {
+					vm.Put(res)
+				}
+			} else {
+				vm.Fatal("Unknown OPCODE: %v", cmd.Type)
+			}
 		default:
 			vm.Error("Unknown command in APPLY: %v", cmd)
 		}

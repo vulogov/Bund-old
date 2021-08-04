@@ -17,7 +17,7 @@ func SeparateEval(vm *VM, args ...interface{}) (*Elem, error) {
 }
 
 func SeparateLambda(vm *VM, args ...interface{}) (*Elem, error) {
-	return &Elem{Type: "SEPARATE", Value: args[0].(string)}, nil
+	return &Elem{Type: "SEPARATE", Value: nil}, nil
 }
 
 func SeparateImport(vm *VM, args ...interface{}) {
