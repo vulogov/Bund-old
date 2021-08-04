@@ -12,6 +12,7 @@ type NS struct {
 	Fun          cmap.Cmap
 	Options      cmap.Cmap
 	LambdasStack deque.Deque
+	Aliases      cmap.Cmap
 }
 
 func NewNS(v *VM, name string) *NS {

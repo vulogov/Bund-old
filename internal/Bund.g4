@@ -36,6 +36,7 @@ term
     | logicblock_term
     | mode_term
     | separate_term
+    | ref_term
   );
 
 data
@@ -65,6 +66,7 @@ boolean_term: VALUE=(TRUE|FALSE)('.(' FUNCTOR=(SYSF|NAME) ')')? ;
 integer_term: VALUE=INTEGER('.(' FUNCTOR=(SYSF|NAME) ')')? ;
 float_term:   VALUE=FLOAT_NUMBER('.(' FUNCTOR=(SYSF|NAME) ')')? ;
 string_term:  VALUE=STRING('.(' FUNCTOR=(SYSF|NAME) ')')? ;
+ref_term:     '#'VALUE=NAME ;
 complex_term: VALUE=COMPLEX_NUMBER('.(' FUNCTOR=(SYSF|NAME) ')')? ;
 glob_term:    VALUE=GLOB('.(' FUNCTOR=(SYSF|NAME) ')')? ;
 

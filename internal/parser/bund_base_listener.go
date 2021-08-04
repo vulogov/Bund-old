@@ -105,6 +105,12 @@ func (s *BaseBundListener) EnterString_term(ctx *String_termContext) {}
 // ExitString_term is called when production string_term is exited.
 func (s *BaseBundListener) ExitString_term(ctx *String_termContext) {}
 
+// EnterRef_term is called when production ref_term is entered.
+func (s *BaseBundListener) EnterRef_term(ctx *Ref_termContext) {}
+
+// ExitRef_term is called when production ref_term is exited.
+func (s *BaseBundListener) ExitRef_term(ctx *Ref_termContext) {}
+
 // EnterComplex_term is called when production complex_term is entered.
 func (s *BaseBundListener) EnterComplex_term(ctx *Complex_termContext) {}
 

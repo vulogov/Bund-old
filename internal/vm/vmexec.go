@@ -9,6 +9,11 @@ func (vm *VM) Exec(name string) (*Elem, error) {
 		err := vm.Apply(name)
 		return nil, err
 	}
+	aval := vm.CurrentNS.GetAlias(name)
+	if aval != nil {
+		vm.Debug("EXEC(%v) returned from Aliases table", name)
+		return aval.(*Elem), nil
+	}
 	if !vm.CanGet() {
 		return nil, fmt.Errorf("Attempt to call a function: %v on empty stack", name)
 	}

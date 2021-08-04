@@ -39,10 +39,36 @@ func ExecuteElement(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
 	return nil, fmt.Errorf("Request to EXECUTE on wrong context: %v", e.Type)
 }
 
+func SetAlias(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
+	if vm.Current.Len() < 1 {
+		return nil, fmt.Errorf("Namespace stack is too shallow for ALIAS operation: %v:%v", vm.CurrentNS.Name, vm.Current.Len())
+	}
+	if e.Type != "str" {
+		return nil, fmt.Errorf("String value is required for an ALIAS operation: %v", e.Type)
+	}
+	e2 := vm.Take()
+	vm.CurrentNS.SetAlias(e.Value.(string), e2)
+	return nil, nil
+}
+
+func GetAlias(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
+	if e.Type != "str" {
+		return nil, fmt.Errorf("String value is required for an ALIAS operation: %v", e.Type)
+	}
+	val := vm.CurrentNS.GetAlias(e.Value.(string))
+	if val == nil {
+		vm.Error("There is no alias for: %v", e.Value.(string))
+		return nil, nil
+	}
+	return val.(*vmmod.Elem), nil
+}
+
 func InitSystemFunctions(vm *vmmod.VM) {
 	vm.Debug("[ BUND ] bund.InitSystemFunctions() reached")
 	vm.AddFunction("passthrough", PassthrougElement)
 	vm.AddFunction(",", DropElement)
 	vm.AddFunction("^", DupElement)
 	vm.AddFunction("!", ExecuteElement)
+	vm.AddFunction("setAlias", SetAlias)
+	vm.AddFunction("alias", GetAlias)
 }

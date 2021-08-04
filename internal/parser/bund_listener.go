@@ -50,6 +50,9 @@ type BundListener interface {
 	// EnterString_term is called when entering the string_term production.
 	EnterString_term(c *String_termContext)
 
+	// EnterRef_term is called when entering the ref_term production.
+	EnterRef_term(c *Ref_termContext)
+
 	// EnterComplex_term is called when entering the complex_term production.
 	EnterComplex_term(c *Complex_termContext)
 
@@ -112,6 +115,9 @@ type BundListener interface {
 
 	// ExitString_term is called when exiting the string_term production.
 	ExitString_term(c *String_termContext)
+
+	// ExitRef_term is called when exiting the ref_term production.
+	ExitRef_term(c *Ref_termContext)
 
 	// ExitComplex_term is called when exiting the complex_term production.
 	ExitComplex_term(c *Complex_termContext)

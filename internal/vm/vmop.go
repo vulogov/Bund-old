@@ -10,6 +10,11 @@ func (vm *VM) Op(name string) (*Elem, error) {
 		err := vm.Apply(name)
 		return nil, err
 	}
+	aval := vm.CurrentNS.GetAlias(name)
+	if aval != nil {
+		vm.Debug("OP(%v) returned from Aliases table", name)
+		return aval.(*Elem), nil
+	}
 	if vm.Current.Len() < 1 {
 		return nil, fmt.Errorf("Attempt to call an operation: %v on empty stack", name)
 	}
