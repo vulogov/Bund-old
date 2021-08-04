@@ -74,6 +74,15 @@ type BundListener interface {
 	// EnterLogicblock_term is called when entering the logicblock_term production.
 	EnterLogicblock_term(c *Logicblock_termContext)
 
+	// EnterFunction_term is called when entering the function_term production.
+	EnterFunction_term(c *Function_termContext)
+
+	// EnterLambda_term is called when entering the lambda_term production.
+	EnterLambda_term(c *Lambda_termContext)
+
+	// EnterOperation_term is called when entering the operation_term production.
+	EnterOperation_term(c *Operation_termContext)
+
 	// ExitExpressions is called when exiting the expressions production.
 	ExitExpressions(c *ExpressionsContext)
 
@@ -139,4 +148,13 @@ type BundListener interface {
 
 	// ExitLogicblock_term is called when exiting the logicblock_term production.
 	ExitLogicblock_term(c *Logicblock_termContext)
+
+	// ExitFunction_term is called when exiting the function_term production.
+	ExitFunction_term(c *Function_termContext)
+
+	// ExitLambda_term is called when exiting the lambda_term production.
+	ExitLambda_term(c *Lambda_termContext)
+
+	// ExitOperation_term is called when exiting the operation_term production.
+	ExitOperation_term(c *Operation_termContext)
 }

@@ -37,6 +37,9 @@ term
     | mode_term
     | separate_term
     | ref_term
+    | function_term
+    | lambda_term
+    | operation_term
   );
 
 data
@@ -85,6 +88,20 @@ matchblock_term
 logicblock_term
   : HDR=('(true'|'(false') (body+=term)* ')'
   ;
+
+function_term
+  : '[' name=NAME ']' (body+=term)* '.'
+  ;
+
+lambda_term
+  : '[]' (body+=term)* '.'
+  ;
+
+
+operation_term
+  : '[[' name=CMD ']]' (body+=term)* '.'
+  ;
+
 
 INTEGER
   :  (SIGN)? DECIMAL_INTEGER

@@ -16,6 +16,26 @@ func Apply(name string, vm *VM) error {
 	for ls.Len() > 0 {
 		cmd := ls.PopFront().(*Elem)
 		fmt.Println(cmd)
+		switch cmd.Type {
+		case "int", "flt", "str", "bool", "cpx":
+			vm.Put(cmd)
+		case "DBLOCK":
+			oh := vm.Opcode("DBLOCK")
+			if oh != nil {
+				oh.InEval(vm, cmd.Value.(string))
+			} else {
+				vm.Fatal("Unknown OPCODE: %v", cmd.Type)
+			}
+		case "exitDBLOCK":
+			oh := vm.Opcode("exitDBLOCK")
+			if oh != nil {
+				oh.InEval(vm)
+			} else {
+				vm.Fatal("Unknown OPCODE: %v", cmd.Type)
+			}
+		default:
+			vm.Error("Unknown command in APPLY: %v", cmd)
+		}
 	}
 	return nil
 }

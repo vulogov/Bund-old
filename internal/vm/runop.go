@@ -37,9 +37,9 @@ func (vm *VM) runop(t string, args ...interface{}) {
 		}
 		ls := vm.CurrentLambda()
 		if ls != nil {
-			if len(args) > 0 {
-				ls.PushBack(res)
-			}
+			ls.PushBack(res)
+		} else {
+			vm.Debug("Following OPCODE not been pushed to Lambda stack: %v", res.Type)
 		}
 	}
 }
@@ -53,4 +53,14 @@ func (vm *VM) RunOp(t string, args ...interface{}) {
 
 func (vm *VM) AlwaysRunOp(t string, args ...interface{}) {
 	vm.runop(t, args...)
+}
+
+func (vm *VM) LambdaRunOp(t string, args ...interface{}) {
+	res, err := vm.Opcode(t).InEval(vm, args...)
+	if err != nil {
+		vm.OnError(err, "Error evaluating: %v", t)
+	}
+	if res != nil {
+		vm.Put(res)
+	}
 }

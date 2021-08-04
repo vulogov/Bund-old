@@ -152,3 +152,21 @@ func (s *BaseBundListener) EnterLogicblock_term(ctx *Logicblock_termContext) {}
 
 // ExitLogicblock_term is called when production logicblock_term is exited.
 func (s *BaseBundListener) ExitLogicblock_term(ctx *Logicblock_termContext) {}
+
+// EnterFunction_term is called when production function_term is entered.
+func (s *BaseBundListener) EnterFunction_term(ctx *Function_termContext) {}
+
+// ExitFunction_term is called when production function_term is exited.
+func (s *BaseBundListener) ExitFunction_term(ctx *Function_termContext) {}
+
+// EnterLambda_term is called when production lambda_term is entered.
+func (s *BaseBundListener) EnterLambda_term(ctx *Lambda_termContext) {}
+
+// ExitLambda_term is called when production lambda_term is exited.
+func (s *BaseBundListener) ExitLambda_term(ctx *Lambda_termContext) {}
+
+// EnterOperation_term is called when production operation_term is entered.
+func (s *BaseBundListener) EnterOperation_term(ctx *Operation_termContext) {}
+
+// ExitOperation_term is called when production operation_term is exited.
+func (s *BaseBundListener) ExitOperation_term(ctx *Operation_termContext) {}
