@@ -63,6 +63,20 @@ func GetAlias(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
 	return val.(*vmmod.Elem), nil
 }
 
+func RefElement(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
+	if e.Type == "REF" {
+		switch v := e.Value.(type) {
+		case *vmmod.Elem:
+			vm.Debug("Dereferencing %v", v.Type)
+			return v, nil
+		}
+		return nil, fmt.Errorf("REF: Attempt of de-referencing the data, but there is no data there")
+	} else {
+		vm.Debug("Making REF for %v", e.Type)
+		return &vmmod.Elem{Type: "REF", Value: e}, nil
+	}
+}
+
 func InitSystemFunctions(vm *vmmod.VM) {
 	vm.Debug("[ BUND ] bund.InitSystemFunctions() reached")
 	vm.AddFunction("passthrough", PassthrougElement)
@@ -71,4 +85,5 @@ func InitSystemFunctions(vm *vmmod.VM) {
 	vm.AddFunction("!", ExecuteElement)
 	vm.AddFunction("setAlias", SetAlias)
 	vm.AddFunction("alias", GetAlias)
+	vm.AddFunction("#", RefElement)
 }

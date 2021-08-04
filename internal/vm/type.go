@@ -11,4 +11,5 @@ func (vm *VM) RegisterTypes() {
 	RegisterDblock(vm)
 	RegisterSep(vm)
 	RegisterGlob(vm)
+	RegisterRef(vm)
 }

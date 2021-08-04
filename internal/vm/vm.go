@@ -21,7 +21,6 @@ type VM struct {
 	Functions   cmap.Cmap
 	Operators   cmap.Cmap
 	Sys         cmap.Cmap
-	Aliases     cmap.Cmap
 }
 
 func NewVM(name string) *VM {

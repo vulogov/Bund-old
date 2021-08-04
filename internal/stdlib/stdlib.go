@@ -14,4 +14,5 @@ func InitFUNCTIONS(vm *vmmod.VM) {
 	InitOpCmp(vm)
 	InitGPMOperators(vm)
 	InitOpSys(vm)
+	InitOpZip(vm)
 }
