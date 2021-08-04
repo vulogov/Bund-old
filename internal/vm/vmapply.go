@@ -22,14 +22,51 @@ func Apply(name string, vm *VM) error {
 		case "DBLOCK":
 			oh := vm.Opcode("DBLOCK")
 			if oh != nil {
-				oh.InEval(vm, cmd.Value.(string))
+				res, err := oh.InEval(vm, cmd.Value.(string))
+				vm.OnError(err, "Error in EVAL")
+				if res != nil {
+					vm.Put(res)
+				}
 			} else {
 				vm.Fatal("Unknown OPCODE: %v", cmd.Type)
 			}
 		case "exitDBLOCK":
 			oh := vm.Opcode("exitDBLOCK")
 			if oh != nil {
-				oh.InEval(vm)
+				res, err := oh.InEval(vm)
+				vm.OnError(err, "Error in EVAL")
+				if res != nil {
+					vm.Put(res)
+				}
+			} else {
+				vm.Fatal("Unknown OPCODE: %v", cmd.Type)
+			}
+		case "CALL":
+			oh := vm.Opcode("CALL")
+			if oh != nil {
+				res, err := oh.InEval(vm, cmd.Value.(string))
+				vm.OnError(err, "Error in EVAL")
+				if res != nil {
+					vm.Put(res)
+				}
+			} else {
+				vm.Fatal("Unknown OPCODE: %v", cmd.Type)
+			}
+		case "OP":
+			oh := vm.Opcode("OP")
+			if oh != nil {
+				res, err := oh.InEval(vm, cmd.Value.(string))
+				vm.OnError(err, "Error in EVAL")
+				if res != nil {
+					vm.Put(res)
+				}
+			} else {
+				vm.Fatal("Unknown OPCODE: %v", cmd.Type)
+			}
+		case "MODE":
+			oh := vm.Opcode("MODE")
+			if oh != nil {
+				oh.InEval(vm, cmd.Value.(string))
 			} else {
 				vm.Fatal("Unknown OPCODE: %v", cmd.Type)
 			}
