@@ -2,6 +2,7 @@ package vm
 
 import (
 	"fmt"
+	"math/big"
 
 	"github.com/gammazero/deque"
 )
@@ -68,4 +69,33 @@ func DblockSprintf(e *Elem) *Elem {
 		}
 	}
 	return nil
+}
+
+func BlockLen(d *Elem) int64 {
+	switch d.Type {
+	case "dblock", "iblock", "uiblock", "fblock":
+		q := d.Value.(*deque.Deque)
+		return int64(q.Len())
+	}
+	return 0
+}
+
+func BlockAt(d *Elem, t string, n int64) (interface{}, error) {
+	if n >= BlockLen(d) {
+		return nil, fmt.Errorf("Index %v is out of bound", n)
+	}
+	switch d.Type {
+	case "dblock":
+		q := d.Value.(*deque.Deque)
+		v := q.At(int(n)).(*Elem)
+		if v.Type != t {
+			return nil, fmt.Errorf("Invalid type at BlockAt %v <> %v", t, v.Type)
+		}
+		switch v.Type {
+		case "int":
+			return v.Value.(*big.Int).Int64(), nil
+		}
+		return v.Value, nil
+	}
+	return nil, fmt.Errorf("I do not know how to extract At value from %v", d.Type)
 }

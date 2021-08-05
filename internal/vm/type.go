@@ -12,4 +12,5 @@ func (vm *VM) RegisterTypes() {
 	RegisterSep(vm)
 	RegisterGlob(vm)
 	RegisterRef(vm)
+	RegisterMatrix(vm)
 }
