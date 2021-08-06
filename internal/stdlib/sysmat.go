@@ -2,7 +2,9 @@ package stdlib
 
 import (
 	"fmt"
+	"math/big"
 
+	"github.com/gammazero/deque"
 	"gonum.org/v1/gonum/mat"
 
 	vmmod "github.com/vulogov/Bund/internal/vm"
@@ -139,9 +141,65 @@ func MatrixElementGet(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
 	return nil, fmt.Errorf("You must have MAT and dblock to perform M/Set operation")
 }
 
+func MatrixElementMake(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
+	var data []float64
+	if e.Type != "dblock" {
+		return nil, fmt.Errorf("Expecting to get DBLOCk with data for matrix creation: %v", e.Type)
+	}
+	q := e.Value.(*deque.Deque)
+	rows := 0
+	cols := 0
+	colsize := 0
+	for i := q.Len() - 1; i >= 0; i-- {
+		e1 := q.At(i).(*vmmod.Elem)
+		if e1.Type == "SEPARATE" {
+			rows += 1
+			if colsize == 0 {
+				colsize = cols
+			}
+			if cols != colsize {
+				return nil, fmt.Errorf("M/Make matrix is not uniform: %v <> %v", colsize, cols)
+			}
+			cols = 0
+			continue
+		}
+		if e1.Type == "flt" {
+			cols += 1
+			data = append(data, e1.Value.(float64))
+		}
+		if e1.Type == "int" {
+			cols += 1
+			data = append(data, float64(e1.Value.(*big.Int).Int64()))
+		}
+	}
+	res := mat.NewDense(rows, colsize, data)
+	return &vmmod.Elem{Type: "MAT", Value: res}, nil
+}
+
+func MatrixElementBlock(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
+	if e.Type != "MAT" {
+		return nil, fmt.Errorf("Expecting to get MAT with data for BLOCK creation: %v", e.Type)
+	}
+	eh, err := vm.GetType("dblock")
+	vm.OnError(err, "Error in M/ToBlock")
+	res := eh.Factory(vm)
+	q := res.Value.(*deque.Deque)
+	x, y := e.Value.(*mat.Dense).Dims()
+	for i := 0; i < x; i++ {
+		q.PushFront(&vmmod.Elem{Type: "SEPARATE", Value: nil})
+		for j := 0; j < y; j++ {
+			e1 := e.Value.(*mat.Dense).At(i, j)
+			q.PushFront(&vmmod.Elem{Type: "flt", Value: e1})
+		}
+	}
+	return res, nil
+}
+
 func InitMatFunctions(vm *vmmod.VM) {
 	vm.Debug("[ BUND ] bund.InitMatFunctions() reached")
 	vm.AddFunction("M", MatrixElement)
+	vm.AddFunction("M/Make", MatrixElementMake)
+	vm.AddFunction("M/ToBlock", MatrixElementBlock)
 	vm.AddFunction("M/Set", MatrixElementSet)
 	vm.AddFunction("M/Get", MatrixElementGet)
 }
