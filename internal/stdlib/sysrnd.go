@@ -4,6 +4,8 @@ import (
 	"crypto/rand"
 	"fmt"
 	"math/big"
+	mrand "math/rand"
+	"time"
 
 	vmmod "github.com/vulogov/Bund/internal/vm"
 )
@@ -28,6 +30,20 @@ func IntRandomElement(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
 	return &vmmod.Elem{Type: "int", Value: res}, nil
 }
 
+func FltRandomElement(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
+	if vm.Current.Len() < 1 {
+		return nil, fmt.Errorf("Namespace stack is too shallow for rnd/Float operation: %v:%v", vm.CurrentNS.Name, vm.Current.Len())
+	}
+	_max := vm.Take()
+	if e.Type != "flt" && _max.Type != "flt" {
+		return nil, fmt.Errorf("Floats required for rnd/Float operation: %v:%v", _max.Type, e.Type)
+	}
+	max := _max.Value.(float64)
+	min := e.Value.(float64)
+	res := (min + mrand.Float64()*(max-min))
+	return &vmmod.Elem{Type: "flt", Value: res}, nil
+}
+
 func PrimeRandomElement(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
 	vm.Debug("rnd/Prime: %v", e.Type)
 	if e.Type != "int" {
@@ -44,6 +60,8 @@ func PrimeRandomElement(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
 
 func InitRndFunctions(vm *vmmod.VM) {
 	vm.Debug("[ BUND ] bund.InitRndFunctions() reached")
+	mrand.Seed(time.Now().UnixNano())
 	vm.AddFunction("rnd/Integer", IntRandomElement)
+	vm.AddFunction("rnd/Float", FltRandomElement)
 	vm.AddFunction("rnd/Prime", PrimeRandomElement)
 }
