@@ -164,3 +164,9 @@ func (s *BaseBundListener) EnterOperation_term(ctx *Operation_termContext) {}
 
 // ExitOperation_term is called when production operation_term is exited.
 func (s *BaseBundListener) ExitOperation_term(ctx *Operation_termContext) {}
+
+// EnterThing_term is called when production thing_term is entered.
+func (s *BaseBundListener) EnterThing_term(ctx *Thing_termContext) {}
+
+// ExitThing_term is called when production thing_term is exited.
+func (s *BaseBundListener) ExitThing_term(ctx *Thing_termContext) {}

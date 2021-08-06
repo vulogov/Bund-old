@@ -39,6 +39,7 @@ term
     | function_term
     | lambda_term
     | operation_term
+    | thing_term
   );
 
 data
@@ -51,6 +52,7 @@ data
     | operator_term
     | separate_term
     | glob_term
+    | thing_term
   );
 
 call_term
@@ -66,7 +68,7 @@ ref_operator_term: '`' VALUE=CMD ;
 
 boolean_term: VALUE=(TRUE|FALSE)('.(' FUNCTOR=(SYSF|NAME) ')')? ;
 integer_term: VALUE=INTEGER('.(' FUNCTOR=(SYSF|NAME) ')')? ;
-float_term:   VALUE=FLOAT_NUMBER('.(' FUNCTOR=(SYSF|NAME) ')')? ;
+float_term:   VALUE=(FLOAT_NUMBER|'+Inf'|'NaN'|'-Inf'|'Inf')('.(' FUNCTOR=(SYSF|NAME) ')')? ;
 string_term:  VALUE=STRING('.(' FUNCTOR=(SYSF|NAME) ')')? ;
 complex_term: VALUE=COMPLEX_NUMBER('.(' FUNCTOR=(SYSF|NAME) ')')? ;
 glob_term:    VALUE=GLOB('.(' FUNCTOR=(SYSF|NAME) ')')? ;
@@ -100,6 +102,10 @@ operation_term
   : '[[' name=CMD ']]' (body+=term)* '.'
   ;
 
+thing_term
+  : '(n' VALUE=('NaN'|'Inf'|'+Inf'|'-Inf') ')'('.(' FUNCTOR=(SYSF|NAME) ')')?
+  ;
+
 
 INTEGER
   :  (SIGN)? DECIMAL_INTEGER
@@ -122,6 +128,7 @@ STRING
 COMPLEX_NUMBER
   : '(' FLOAT_NUMBER SIGN FLOAT_NUMBER 'i)'
   ;
+
 
 TRUE
   : 'true'
@@ -171,6 +178,7 @@ GLOB
 SEPARATE
   : '|'
   ;
+
 
 COMMENT
   : '##' ~[\r\n]* -> skip
