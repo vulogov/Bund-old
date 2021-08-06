@@ -4,6 +4,36 @@ import (
 	"fmt"
 )
 
+func EvalCmd(vm *VM, cmd *Elem) {
+	oh := vm.Opcode(cmd.Type)
+	if oh != nil {
+		if cmd.Value != nil {
+			res, err := oh.InEval(vm, cmd.Value.(string))
+			vm.OnError(err, "Error in EVAL")
+			if res != nil {
+				vm.Put(res)
+			}
+		} else {
+			res, err := oh.InEval(vm)
+			vm.OnError(err, "Error in EVAL")
+			if res != nil {
+				vm.Put(res)
+			}
+		}
+	} else {
+		vm.Fatal("Unknown OPCODE: %v", cmd.Type)
+	}
+}
+
+func SimpleEvalCmd(vm *VM, cmd *Elem) {
+	oh := vm.Opcode("MODE")
+	if oh != nil {
+		oh.InEval(vm, cmd.Value.(string))
+	} else {
+		vm.Fatal("Unknown OPCODE: %v", cmd.Type)
+	}
+}
+
 func Apply(name string, vm *VM) error {
 	if !vm.IsStack() {
 		return fmt.Errorf("Attempt to execute lambda %v on empty context", name)
@@ -17,70 +47,30 @@ func Apply(name string, vm *VM) error {
 		cmd := ls.PopFront().(*Elem)
 		fmt.Println(cmd)
 		switch cmd.Type {
-		case "int", "flt", "str", "bool", "cpx":
+		case "int", "flt", "str", "bool", "cpx", "glob":
 			vm.Put(cmd)
-		case "DBLOCK":
-			oh := vm.Opcode("DBLOCK")
-			if oh != nil {
-				res, err := oh.InEval(vm, cmd.Value.(string))
-				vm.OnError(err, "Error in EVAL")
-				if res != nil {
-					vm.Put(res)
-				}
-			} else {
-				vm.Fatal("Unknown OPCODE: %v", cmd.Type)
-			}
-		case "exitDBLOCK":
-			oh := vm.Opcode("exitDBLOCK")
-			if oh != nil {
-				res, err := oh.InEval(vm)
-				vm.OnError(err, "Error in EVAL")
-				if res != nil {
-					vm.Put(res)
-				}
-			} else {
-				vm.Fatal("Unknown OPCODE: %v", cmd.Type)
-			}
+		case "NS", "exitNS":
+			EvalCmd(vm, cmd)
+		case "BLOCK", "exitBLOCK":
+			EvalCmd(vm, cmd)
+		case "DBLOCK", "exitDBLOCK":
+			EvalCmd(vm, cmd)
 		case "CALL":
-			oh := vm.Opcode("CALL")
-			if oh != nil {
-				res, err := oh.InEval(vm, cmd.Value.(string))
-				vm.OnError(err, "Error in EVAL")
-				if res != nil {
-					vm.Put(res)
-				}
-			} else {
-				vm.Fatal("Unknown OPCODE: %v", cmd.Type)
-			}
+			EvalCmd(vm, cmd)
 		case "OP":
-			oh := vm.Opcode("OP")
-			if oh != nil {
-				res, err := oh.InEval(vm, cmd.Value.(string))
-				vm.OnError(err, "Error in EVAL")
-				if res != nil {
-					vm.Put(res)
-				}
-			} else {
-				vm.Fatal("Unknown OPCODE: %v", cmd.Type)
-			}
+			EvalCmd(vm, cmd)
 		case "MODE":
-			oh := vm.Opcode("MODE")
-			if oh != nil {
-				oh.InEval(vm, cmd.Value.(string))
-			} else {
-				vm.Fatal("Unknown OPCODE: %v", cmd.Type)
-			}
+			SimpleEvalCmd(vm, cmd)
 		case "SEPARATE":
-			oh := vm.Opcode("SEPARATE")
-			if oh != nil {
-				res, err := oh.InEval(vm)
-				vm.OnError(err, "Error in EVAL")
-				if res != nil {
-					vm.Put(res)
-				}
-			} else {
-				vm.Fatal("Unknown OPCODE: %v", cmd.Type)
-			}
+			EvalCmd(vm, cmd)
+		case "MBLOCK", "exitMBLOCK":
+			EvalCmd(vm, cmd)
+		case "TRUEBLOCK", "FALSEBLOCK":
+			EvalCmd(vm, cmd)
+		case "exitTRUEBLOCK", "exitFALSEBLOCK":
+			EvalCmd(vm, cmd)
+		case "FUNCTION", "exitFUNCTION":
+			EvalCmd(vm, cmd)
 		default:
 			vm.Error("Unknown command in APPLY: %v", cmd)
 		}

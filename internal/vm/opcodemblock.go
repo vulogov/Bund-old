@@ -48,7 +48,8 @@ func ExitMBlockEval(vm *VM, args ...interface{}) (*Elem, error) {
 	if vm.NSStack.Len() == 1 {
 		q = vm.RootNS.Stack
 	} else {
-		q = vm.NSStack.At(1).(deque.Deque)
+		lns := vm.NSStack.At(1).(*NS)
+		q = lns.Stack
 	}
 	if vm.Mode {
 		val = q.Back().(*Elem)

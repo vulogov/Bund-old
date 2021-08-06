@@ -44,7 +44,7 @@ func ExitBlockEval(vm *VM, args ...interface{}) (*Elem, error) {
 
 func ExitBlockLambda(vm *VM, args ...interface{}) (*Elem, error) {
 	vm.Debug("exit BLOCK(in lambda) %v", args)
-	return &Elem{Type: "BLOCK", Value: nil}, nil
+	return &Elem{Type: "exitBLOCK", Value: nil}, nil
 }
 
 func ExitBlockImport(vm *VM, args ...interface{}) {

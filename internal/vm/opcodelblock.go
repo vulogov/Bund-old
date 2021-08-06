@@ -40,13 +40,20 @@ func LBlockEval(vm *VM, args ...interface{}) (*Elem, error) {
 	return nil, fmt.Errorf("Do not have enough data about LBLOCK()")
 }
 
+func TRUEBlockEval(vm *VM, args ...interface{}) (*Elem, error) {
+	return LBlockEval(vm, args[0].(string), "", true)
+}
+func FALSEBlockEval(vm *VM, args ...interface{}) (*Elem, error) {
+	return LBlockEval(vm, args[0].(string), "", false)
+}
+
 func LBlockLambda(vm *VM, args ...interface{}) (*Elem, error) {
 	if len(args) < 2 {
 		return nil, fmt.Errorf("There is no information from the LBLOCK header")
 	}
 	vm.Debug("LBLOCK: %v", args)
 	blockname := args[0].(string)
-	lbmode := args[1].(bool)
+	lbmode := args[2].(bool)
 	vm.Debug("LBLOCK(in lambda) %v", args)
 	if lbmode == true {
 		return &Elem{Type: "TRUEBLOCK", Value: blockname}, nil
@@ -72,27 +79,30 @@ func ExitLBlockEval(vm *VM, args ...interface{}) (*Elem, error) {
 		return nil, fmt.Errorf("There is no information from the LBLOCK header")
 	}
 	lbmode := args[0].(bool)
-	vm.Debug("EXITING %v Block", lbmode)
 	if !vm.MustIgnore() {
-		if vm.CanGet() {
-			vm.EndNS()
-		}
+		vm.Debug("EXITING %v Block", lbmode)
+		vm.EndNS()
 	}
 	return nil, nil
 }
 
+func ExitTRUEBlockEval(vm *VM, args ...interface{}) (*Elem, error) {
+	return ExitLBlockEval(vm, true)
+}
+func ExitFALSEBlockEval(vm *VM, args ...interface{}) (*Elem, error) {
+	return ExitLBlockEval(vm, false)
+}
+
 func ExitLBlockLambda(vm *VM, args ...interface{}) (*Elem, error) {
-	if len(args) < 2 {
+	if len(args) < 1 {
 		return nil, fmt.Errorf("There is no information from the LBLOCK header")
 	}
-	vm.Debug("LBLOCK: %v", args)
-	blockname := args[0].(string)
-	lbmode := args[1].(bool)
+	lbmode := args[0].(bool)
 	vm.Debug("exit LBLOCK(in lambda) %v", args)
 	if lbmode == true {
-		return &Elem{Type: "exitTRUEBLOCK", Value: blockname}, nil
+		return &Elem{Type: "exitTRUEBLOCK", Value: nil}, nil
 	} else {
-		return &Elem{Type: "exitFALSEBLOCK", Value: blockname}, nil
+		return &Elem{Type: "exitFALSEBLOCK", Value: nil}, nil
 	}
 }
 
@@ -106,5 +116,9 @@ func ExitLBlockExport(vm *VM, args ...interface{}) {
 
 func InitOpcodeLBlock(vm *VM) {
 	vm.RegisterOpcode("LBLOCK", LBlockParser, LBlockLambda, LBlockEval, LBlockImport, LBlockExport)
+	vm.RegisterOpcode("TRUEBLOCK", LBlockParser, LBlockLambda, TRUEBlockEval, LBlockImport, LBlockExport)
+	vm.RegisterOpcode("FALSEBLOCK", LBlockParser, LBlockLambda, FALSEBlockEval, LBlockImport, LBlockExport)
 	vm.RegisterOpcode("exitLBLOCK", ExitLBlockParser, ExitLBlockLambda, ExitLBlockEval, ExitLBlockImport, ExitLBlockExport)
+	vm.RegisterOpcode("exitTRUEBLOCK", ExitLBlockParser, ExitLBlockLambda, ExitTRUEBlockEval, ExitLBlockImport, ExitLBlockExport)
+	vm.RegisterOpcode("exitFALSEBLOCK", ExitLBlockParser, ExitLBlockLambda, ExitFALSEBlockEval, ExitLBlockImport, ExitLBlockExport)
 }

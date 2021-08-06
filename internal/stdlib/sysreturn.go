@@ -11,7 +11,7 @@ func ReturnElement(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
 		return nil, fmt.Errorf("Namespace stack is too shallow for RETURN operation: %v", vm.NSStack.Len())
 	}
 	nsr := vm.NSStack.Back().(*vmmod.NS)
-	vm.Debug("RETURN to %v", nsr.Name)
+	vm.Debug("RETURN %v to %v", e.Type, nsr.Name)
 	if vm.Mode {
 		nsr.Stack.PushBack(e)
 	} else {
@@ -25,12 +25,13 @@ func ReturnElementAndKeepOriginal(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, err
 		return nil, fmt.Errorf("Namespace stack is too shallow for RETURN operation: %v", vm.NSStack.Len())
 	}
 	nsr := vm.NSStack.Back().(*vmmod.NS)
-	vm.Debug("RETURN to %v", nsr.Name)
+	vm.Debug("RETURN %v to %v", e.Type, nsr.Name)
 	if vm.Mode {
 		nsr.Stack.PushBack(e)
 	} else {
 		nsr.Stack.PushFront(e)
 	}
+	vm.Debug("Keeing %v in current context", e.Type)
 	return e, nil
 }
 

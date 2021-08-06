@@ -11,6 +11,7 @@ func InitFUNCTIONS(vm *vmmod.VM) {
 	InitReturnFunctions(vm)
 	InitConsoleFunctions(vm)
 	InitMatFunctions(vm)
+	InitRndFunctions(vm)
 	InitOpMath(vm)
 	InitOpCmp(vm)
 	InitGPMOperators(vm)
