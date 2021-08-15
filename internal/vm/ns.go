@@ -6,18 +6,20 @@ import (
 )
 
 type NS struct {
-	Name         string
-	VM           *VM
-	Stack        deque.Deque
-	Fun          cmap.Cmap
-	Options      cmap.Cmap
-	LambdasStack deque.Deque
-	Aliases      cmap.Cmap
+	Name              string
+	VM                *VM
+	Stack             deque.Deque
+	Fun               *cmap.Cmap
+	Options           cmap.Cmap
+	LambdasStack      deque.Deque
+	Aliases           cmap.Cmap
+	CurrentLambdaName string
+	LCache            cmap.Cmap
 }
 
 func NewNS(v *VM, name string) *NS {
 	v.Debug("Creating NAMESPACE: %v", name)
-	return &NS{Name: name, VM: v}
+	return &NS{Name: name, VM: v, Fun: new(cmap.Cmap)}
 }
 
 func (ns *NS) SetOption(key string, val interface{}) {

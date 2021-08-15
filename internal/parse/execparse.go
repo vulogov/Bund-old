@@ -21,7 +21,7 @@ type bundExecErrorListener struct {
 	errors int
 }
 
-func ParserExec(name string, code string) *vm.VM {
+func ParserExec(_vm *vm.VM, name string, code string) *vm.VM {
 	errorListener := new(bundExecErrorListener)
 	errorListener.code = &code
 	_input := antlr.NewInputStream(code)
@@ -33,7 +33,13 @@ func ParserExec(name string, code string) *vm.VM {
 	p.RemoveErrorListeners()
 	p.AddErrorListener(errorListener)
 	listener := new(bundExecListener)
-	listener.VM = vm.NewVM(name)
+	if _vm == nil {
+		listener.VM = vm.NewVM(name)
+		listener.VM.Debug("New VM created: %v ", name)
+	} else {
+		listener.VM = _vm
+		listener.VM.Debug("Existing VM used: %v ", _vm.Name)
+	}
 	stdlib.InitFUNCTIONS(listener.VM)
 	errorListener.VM = listener.VM
 	if errorListener.errors > 0 {

@@ -14,10 +14,11 @@ func AddOperator(vm *vmmod.VM, e1 *vmmod.Elem, e2 *vmmod.Elem) (*vmmod.Elem, err
 	if e1.Type == e2.Type {
 		switch e1.Type {
 		case "int":
+			res := big.NewInt(0)
 			d1 := e1.Value.(*big.Int)
 			d2 := e2.Value.(*big.Int)
-			d1.Add(d1, d2)
-			return &vmmod.Elem{Type: "int", Value: d1}, nil
+			res.Add(d1, d2)
+			return &vmmod.Elem{Type: "int", Value: res}, nil
 		case "flt":
 			return &vmmod.Elem{Type: "flt", Value: (e1.Value.(float64) + e2.Value.(float64))}, nil
 		case "str":
@@ -52,17 +53,18 @@ func AddOperator(vm *vmmod.VM, e1 *vmmod.Elem, e2 *vmmod.Elem) (*vmmod.Elem, err
 			}
 		}
 	}
-	return nil, fmt.Errorf("I do not know how to perform '+' for this data")
+	return nil, fmt.Errorf("I do not know how to perform '+' for this data %v %v", e1.Type, e2.Type)
 }
 
 func MulOperator(vm *vmmod.VM, e1 *vmmod.Elem, e2 *vmmod.Elem) (*vmmod.Elem, error) {
 	if e1.Type == e2.Type {
 		switch e1.Type {
 		case "int":
+			res := big.NewInt(0)
 			d1 := e1.Value.(*big.Int)
 			d2 := e2.Value.(*big.Int)
-			d1.Mul(d1, d2)
-			return &vmmod.Elem{Type: "int", Value: d1}, nil
+			res.Mul(d1, d2)
+			return &vmmod.Elem{Type: "int", Value: res}, nil
 		case "flt":
 			return &vmmod.Elem{Type: "flt", Value: (e1.Value.(float64) * e2.Value.(float64))}, nil
 		case "dblock":
@@ -102,10 +104,11 @@ func DivOperator(vm *vmmod.VM, e1 *vmmod.Elem, e2 *vmmod.Elem) (*vmmod.Elem, err
 	if e1.Type == e2.Type {
 		switch e1.Type {
 		case "int":
+			res := big.NewInt(0)
 			d1 := e1.Value.(*big.Int)
 			d2 := e2.Value.(*big.Int)
-			d1.Div(d1, d2)
-			return &vmmod.Elem{Type: "int", Value: d1}, nil
+			res.Div(d1, d2)
+			return &vmmod.Elem{Type: "int", Value: res}, nil
 		case "flt":
 			return &vmmod.Elem{Type: "flt", Value: (e1.Value.(float64) / e2.Value.(float64))}, nil
 		case "dblock":
@@ -145,10 +148,11 @@ func SubOperator(vm *vmmod.VM, e1 *vmmod.Elem, e2 *vmmod.Elem) (*vmmod.Elem, err
 	if e1.Type == e2.Type {
 		switch e1.Type {
 		case "int":
+			res := big.NewInt(0)
 			d1 := e1.Value.(*big.Int)
 			d2 := e2.Value.(*big.Int)
-			d1.Sub(d1, d2)
-			return &vmmod.Elem{Type: "int", Value: d1}, nil
+			res.Sub(d1, d2)
+			return &vmmod.Elem{Type: "int", Value: res}, nil
 		case "flt":
 			return &vmmod.Elem{Type: "flt", Value: (e1.Value.(float64) - e2.Value.(float64))}, nil
 		case "dblock":

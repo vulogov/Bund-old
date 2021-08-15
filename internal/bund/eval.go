@@ -19,6 +19,6 @@ func Eval() {
 		parse.ParserPrint(*conf.Expr)
 		return
 	}
-	parse.ParserExec("<eval>", *conf.Expr)
+	parse.ParserExec(nil, "<eval>", *conf.Expr)
 	signal.ExitRequest()
 }

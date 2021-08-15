@@ -24,7 +24,7 @@ func FloatEval(vm *VM, args ...interface{}) (*Elem, error) {
 }
 
 func FloatLambda(vm *VM, args ...interface{}) (*Elem, error) {
-	val, err := IntegerEval(vm, args...)
+	val, err := FloatEval(vm, args...)
 	if val != nil {
 		return val, nil
 	}

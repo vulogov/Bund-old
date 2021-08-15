@@ -25,3 +25,5 @@ pre:
 	go get github.com/google/uuid
 	go get github.com/cstockton/go-conv
 	go get github.com/ganbarodigital/go_glob
+	go get github.com/dustin/go-humanize
+	go get github.com/peterh/liner

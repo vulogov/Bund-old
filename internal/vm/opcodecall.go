@@ -12,7 +12,7 @@ func CallEval(vm *VM, args ...interface{}) (*Elem, error) {
 	if len(args) == 0 {
 		return nil, fmt.Errorf("I do not know what to CALL")
 	}
-	vm.Debug("CALL: %v", args)
+	vm.Debug("CALL(%v): %v", vm.CurrentNS.Name, args)
 	val, err := vm.Exec(args[0].(string))
 	if err != nil {
 		return nil, fmt.Errorf("F(%v) returns: %v", args[0].(string), err)

@@ -24,6 +24,7 @@ func OpLambda(vm *VM, args ...interface{}) (*Elem, error) {
 	if len(args) == 0 {
 		return nil, fmt.Errorf("OP: I do not know what to call")
 	}
+	vm.Debug("OP(in lambda): %v", args)
 	return &Elem{Type: "OP", Value: args[0].(string)}, nil
 }
 

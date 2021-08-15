@@ -26,7 +26,7 @@ func EvalCmd(vm *VM, cmd *Elem) {
 }
 
 func SimpleEvalCmd(vm *VM, cmd *Elem) {
-	oh := vm.Opcode("MODE")
+	oh := vm.Opcode(cmd.Type)
 	if oh != nil {
 		oh.InEval(vm, cmd.Value.(string))
 	} else {
@@ -35,19 +35,43 @@ func SimpleEvalCmd(vm *VM, cmd *Elem) {
 }
 
 func Apply(name string, vm *VM) error {
+	var cmd *Elem
 	if !vm.IsStack() {
 		return fmt.Errorf("Attempt to execute lambda %v on empty context", name)
 	}
-	ls := vm.CurrentNS.GetLambda(name)
-	if ls == nil {
-		return fmt.Errorf("Lambda %v not exist in %v", name, vm.Name)
+	if !vm.CurrentNS.InLCache(name) {
+		vm.Debug("Adding lambda %v to lcache", name)
+		ls := vm.CurrentNS.GetLambda(name)
+		if ls == nil {
+			return fmt.Errorf("Lambda %v not exist in %v", name, vm.Name)
+		}
+		for i := 0; i < ls.Len(); i++ {
+			cmd = ls.At(i).(*Elem)
+			vm.CurrentNS.AddToLCache(name, cmd)
+		}
+	} else {
+		vm.Debug("Lambda %v already in lcache", name)
 	}
-	vm.Debug("Executing lambda %v in %v", name, vm.Name)
-	for ls.Len() > 0 {
-		cmd := ls.PopFront().(*Elem)
-		fmt.Println(cmd)
+	cl := vm.CurrentNS.LCacheGet(name)
+	if cl == nil {
+		return fmt.Errorf("Lambda %v is missed in LCache", name)
+	}
+	for i := 0; i < len(cl); i++ {
+		cmd = &cl[i]
+		switch cmd.Type {
+		case "TRUEBLOCK", "FALSEBLOCK":
+			EvalCmd(vm, cmd)
+			continue
+		case "exitTRUEBLOCK", "exitFALSEBLOCK":
+			EvalCmd(vm, cmd)
+			continue
+		}
+		if vm.CheckIgnore() {
+			continue
+		}
 		switch cmd.Type {
 		case "int", "flt", "str", "bool", "cpx", "glob":
+			vm.Debug("DATA: %v", cmd)
 			vm.Put(cmd)
 		case "NS", "exitNS":
 			EvalCmd(vm, cmd)
@@ -65,16 +89,14 @@ func Apply(name string, vm *VM) error {
 			EvalCmd(vm, cmd)
 		case "MBLOCK", "exitMBLOCK":
 			EvalCmd(vm, cmd)
-		case "TRUEBLOCK", "FALSEBLOCK":
-			EvalCmd(vm, cmd)
-		case "exitTRUEBLOCK", "exitFALSEBLOCK":
-			EvalCmd(vm, cmd)
 		case "FUNCTION", "exitFUNCTION":
 			EvalCmd(vm, cmd)
 		default:
 			vm.Error("Unknown command in APPLY: %v", cmd)
 		}
+		vm.DbgFun(i, cmd)
 	}
+	vm.CurrentNS.LCacheDel(name)
 	return nil
 }
 

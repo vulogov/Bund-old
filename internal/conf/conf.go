@@ -40,6 +40,7 @@ var (
 	Debug   = App.Flag("debug", "Enable debug mode.").Default("false").Bool()
 	Color   = App.Flag("color", "--color : Enable colors on terminal --no-color : Disable colors .").Default("true").Bool()
 	VBanner = App.Flag("banner", "Display [ BUND ] banner .").Default("false").Bool()
+	DbgFun  = App.Flag("dbgfun", "Interfactive debugger for the function.").String()
 
 	Version = App.Command("version", "Display information about [ BUND ]")
 	VTable  = Version.Flag("table", "Display [ BUND ] inner information .").Default("true").Bool()

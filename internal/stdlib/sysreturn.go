@@ -58,6 +58,7 @@ func ReturnElementFrom(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
 		return nil, fmt.Errorf("Namespace stack is too shallow for RETURNFROM operation: %v:%v", vm.CurrentNS.Name, vm.Current.Len())
 	}
 	e2 := vm.Take()
+	vm.Debug("Taking %v from %v %v elemets left", e2.Type, vm.CurrentNS.Name, vm.Current.Len())
 	vm.EndNS()
 	return e2, nil
 }
@@ -71,6 +72,7 @@ func ReturnElementFromAndKeepOriginal(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem,
 		return nil, fmt.Errorf("Namespace stack is too shallow for RETURNFROM operation: %v:%v", vm.CurrentNS.Name, vm.Current.Len())
 	}
 	e2 := vm.Get()
+	vm.Debug("Getting %v from %v %v elemets left", e2.Type, vm.CurrentNS.Name, vm.Current.Len())
 	vm.EndNS()
 	return e2, nil
 }

@@ -2,6 +2,9 @@ package stdlib
 
 import (
 	"fmt"
+	"math/big"
+	"os"
+	"time"
 
 	vmmod "github.com/vulogov/Bund/internal/vm"
 )
@@ -11,19 +14,61 @@ func PassthrougElement(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
 	return e, nil
 }
 
+func PrintStack(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
+	vm.Debug("PRINTSTACK: %v", e.Type)
+	vm.Put(e)
+	res := fmt.Sprintf("(%v)[ ", vm.CurrentNS.Name)
+	for i := vm.Current.Len() - 1; i >= 0; i-- {
+		_e := vm.Current.At(i)
+		eh, err := vm.GetType(_e.(*vmmod.Elem).Type)
+		if err != nil {
+			vm.Error("Can not get type: %v", _e.(*vmmod.Elem).Type)
+			continue
+		}
+		res = res + eh.ToString(vm, _e.(*vmmod.Elem))
+		res = res + ", "
+	}
+	res = res + " ]"
+	fmt.Println(res)
+	return nil, nil
+}
+
+func PrintCurrentFun(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
+	vm.Put(e)
+	if vm.CurrentNS.CurrentLambdaName != "" {
+		ls := vm.CurrentNS.GetLambda(vm.CurrentNS.CurrentLambdaName)
+		if ls == nil {
+			return nil, fmt.Errorf("Lambda %v not exist in %v", vm.CurrentNS.CurrentLambdaName, vm.Name)
+		}
+		for i := 0; i < ls.Len(); i++ {
+			cmd := ls.At(i).(*vmmod.Elem)
+			fmt.Printf("%v: %v\n", i, cmd)
+		}
+	}
+	return nil, nil
+}
+
 func DropElement(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
 	vm.Debug("DROP: %v", e.Type)
 	return nil, nil
 }
 
+func DropOppositeElement(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
+	if vm.Current.Len() > 0 {
+		vm.Debug("DROP OPPOSITE: %v", e.Type)
+		vm.TakeOpposite()
+	}
+	return e, nil
+}
+
 func DupElement(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
-	vm.Debug("DUP: %v", e.Type)
 	eh, err := vm.GetType(e.Type)
 	if err != nil {
 		return nil, err
 	}
 	vm.Put(e)
 	res := eh.Duplicate(vm, e)
+	vm.Debug("DUP: %v %v", e.Type, eh.ToString(vm, e))
 	return res, nil
 }
 
@@ -77,13 +122,44 @@ func RefElement(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
 	}
 }
 
+func SleepFun(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
+	var d int
+	switch e.Type {
+	case "int":
+		d = int(e.Value.(*big.Int).Mul(e.Value.(*big.Int), big.NewInt(1000000000)).Int64())
+	case "flt":
+		d = int(e.Value.(float64) * 1000000000)
+	default:
+		return nil, fmt.Errorf("Parameter for 'sleep' is not float or int: %v", e.Type)
+	}
+	vm.Debug("Sleeping for a %v 𝝶-seconds", d)
+	time.Sleep(time.Duration(d) * time.Nanosecond)
+	return e, nil
+}
+
+func ExitFun(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
+	if e.Type != "int" {
+		return nil, fmt.Errorf("Exit function require a number in stack: %v", e.Type)
+	}
+	res := int(e.Value.(*big.Int).Int64())
+	vm.Debug("EXIT is called with %v", res)
+	os.Exit(res)
+	return nil, nil
+}
+
 func InitSystemFunctions(vm *vmmod.VM) {
 	vm.Debug("[ BUND ] bund.InitSystemFunctions() reached")
 	vm.AddFunction("passthrough", PassthrougElement)
+	vm.AddFunction("dumpstack", PrintStack)
+	vm.AddFunction("dumpfun", PrintCurrentFun)
 	vm.AddFunction(",", DropElement)
+	vm.AddFunction("_,", DropElement)
+	vm.AddFunction(",_", DropOppositeElement)
 	vm.AddFunction("^", DupElement)
 	vm.AddFunction("!", ExecuteElement)
 	vm.AddFunction("setAlias", SetAlias)
 	vm.AddFunction("alias", GetAlias)
 	vm.AddFunction("#", RefElement)
+	vm.AddFunction("sleep", SleepFun)
+	vm.AddFunction("exit", ExitFun)
 }

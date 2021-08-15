@@ -42,3 +42,18 @@ func (vm *VM) Take() *Elem {
 	}
 	return res.(*Elem)
 }
+
+func (vm *VM) TakeOpposite() *Elem {
+	var res interface{}
+
+	if !vm.CanGet() {
+		vm.Error("Attempt to TakeOpposite() but Stack doesn't exists or empty")
+		return nil
+	}
+	if !vm.Mode {
+		res = vm.Current.PopBack()
+	} else {
+		res = vm.Current.PopFront()
+	}
+	return res.(*Elem)
+}

@@ -45,6 +45,24 @@ func isneq(vm *vmmod.VM, res int) bool {
 	}
 }
 
+func isls(vm *vmmod.VM, res int) bool {
+	vm.Debug("CMP result is %v", res)
+	if res == vmmod.Ls {
+		return true
+	} else {
+		return false
+	}
+}
+
+func isgt(vm *vmmod.VM, res int) bool {
+	vm.Debug("CMP result is %v", res)
+	if res == vmmod.Gt {
+		return true
+	} else {
+		return false
+	}
+}
+
 func EqOperator(vm *vmmod.VM, e1 *vmmod.Elem, e2 *vmmod.Elem) (*vmmod.Elem, error) {
 	return runcmp(vm, e1, e2, iseq)
 }
@@ -53,8 +71,18 @@ func NEqOperator(vm *vmmod.VM, e1 *vmmod.Elem, e2 *vmmod.Elem) (*vmmod.Elem, err
 	return runcmp(vm, e1, e2, isneq)
 }
 
+func LSqOperator(vm *vmmod.VM, e1 *vmmod.Elem, e2 *vmmod.Elem) (*vmmod.Elem, error) {
+	return runcmp(vm, e1, e2, isls)
+}
+
+func GTqOperator(vm *vmmod.VM, e1 *vmmod.Elem, e2 *vmmod.Elem) (*vmmod.Elem, error) {
+	return runcmp(vm, e1, e2, isgt)
+}
+
 func InitOpCmp(vm *vmmod.VM) {
 	vm.Debug("[ BUND ] bund.InitOpCmp() reached")
 	vm.AddOperator("=", EqOperator)
 	vm.AddOperator("<>", NEqOperator)
+	vm.AddOperator("<", GTqOperator)
+	vm.AddOperator(">", LSqOperator)
 }

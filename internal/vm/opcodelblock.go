@@ -13,19 +13,16 @@ func LBlockEval(vm *VM, args ...interface{}) (*Elem, error) {
 		return nil, fmt.Errorf("There is no information from the LBLOCK header")
 	}
 	vm.Debug("LBLOCK: %v", args)
-	blockname := args[0].(string)
 	lbmode := args[2].(bool)
 	if vm.CanGet() {
 		e := vm.Get()
 		if e.Type == "bool" {
 			if e.Value.(bool) == false && lbmode == false {
 				vm.NotIgnore()
-				vm.GetNS(blockname)
 				vm.Debug("%v Block will be executed", lbmode)
 				return nil, nil
 			} else if e.Value.(bool) == true && lbmode == true {
 				vm.NotIgnore()
-				vm.GetNS(blockname)
 				vm.Debug("%v Block will be executed", lbmode)
 				return nil, nil
 			}
@@ -81,7 +78,6 @@ func ExitLBlockEval(vm *VM, args ...interface{}) (*Elem, error) {
 	lbmode := args[0].(bool)
 	if !vm.MustIgnore() {
 		vm.Debug("EXITING %v Block", lbmode)
-		vm.EndNS()
 	}
 	return nil, nil
 }

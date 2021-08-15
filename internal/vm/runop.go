@@ -37,6 +37,7 @@ func (vm *VM) runop(t string, args ...interface{}) {
 		}
 		ls := vm.CurrentLambda()
 		if ls != nil {
+			vm.Debug("TO f(%v) %v", vm.CurrentNS.NameOfCurrentLambda(), res)
 			ls.PushBack(res)
 		} else {
 			vm.Debug("Following OPCODE not been pushed to Lambda stack: %v", res.Type)
