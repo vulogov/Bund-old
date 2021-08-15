@@ -54,6 +54,7 @@ data
     | glob_term
     | thing_term
     | lambda_term
+    | ref_call_term
   );
 
 call_term
