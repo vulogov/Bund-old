@@ -46,6 +46,19 @@ func (vm *VM) HasUserFunction(name string) bool {
 	return vm.CurrentNS.HasLambda(name)
 }
 
+func (vm *VM) HasUserFunctionInNS(name string, nsname string) bool {
+	if !vm.IsStack() {
+		vm.Error("Attempt to HasUserFunctionInNs(%v) on empty context", name)
+		return false
+	}
+	ns := vm.AsNS(nsname)
+	if ns == nil {
+		vm.Error("Ns(%v) not exists", nsname)
+		return false
+	}
+	return ns.HasLambda(name)
+}
+
 func (vm *VM) GetFunction(name string) (BundFunction, error) {
 	if res, ok := vm.Functions.Load(name); ok {
 		return res.(BundFunction), nil

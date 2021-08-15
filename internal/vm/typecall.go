@@ -14,7 +14,7 @@ func CallToString(vm *VM, e *Elem) string {
 	if e.Type == "CALL" {
 		switch v := e.Value.(type) {
 		case string:
-			return fmt.Sprintf("[%v]", string(v))
+			return fmt.Sprintf("CALL[%v]", string(v))
 		}
 	}
 	vm.Error("trying to convert a CALL and it is not a CALL: %v %T", e.Type, e.Value)

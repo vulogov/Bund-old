@@ -53,6 +53,7 @@ data
     | separate_term
     | glob_term
     | thing_term
+    | lambda_term
   );
 
 call_term

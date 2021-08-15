@@ -33,21 +33,6 @@ func PrintStack(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
 	return nil, nil
 }
 
-func PrintCurrentFun(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
-	vm.Put(e)
-	if vm.CurrentNS.CurrentLambdaName != "" {
-		ls := vm.CurrentNS.GetLambda(vm.CurrentNS.CurrentLambdaName)
-		if ls == nil {
-			return nil, fmt.Errorf("Lambda %v not exist in %v", vm.CurrentNS.CurrentLambdaName, vm.Name)
-		}
-		for i := 0; i < ls.Len(); i++ {
-			cmd := ls.At(i).(*vmmod.Elem)
-			fmt.Printf("%v: %v\n", i, cmd)
-		}
-	}
-	return nil, nil
-}
-
 func DropElement(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
 	vm.Debug("DROP: %v", e.Type)
 	return nil, nil
@@ -151,7 +136,6 @@ func InitSystemFunctions(vm *vmmod.VM) {
 	vm.Debug("[ BUND ] bund.InitSystemFunctions() reached")
 	vm.AddFunction("passthrough", PassthrougElement)
 	vm.AddFunction("dumpstack", PrintStack)
-	vm.AddFunction("dumpfun", PrintCurrentFun)
 	vm.AddFunction(",", DropElement)
 	vm.AddFunction("_,", DropElement)
 	vm.AddFunction(",_", DropOppositeElement)

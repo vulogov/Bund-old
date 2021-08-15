@@ -40,6 +40,7 @@ func ExitDBlockEval(vm *VM, args ...interface{}) (*Elem, error) {
 	if vm.Current != nil {
 		vm.Debug("EXITING Data Block. Stack size: %v", vm.Current.Len())
 		res := new(Elem)
+		res.Name = vm.CurrentNS.Name
 		res.Type = "dblock"
 		res.Value = vm.Current
 		vm.CurrentNS.SetOption("separateinline", false)

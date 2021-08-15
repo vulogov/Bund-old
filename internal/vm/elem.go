@@ -5,6 +5,7 @@ import (
 )
 
 type Elem struct {
+	Name  string
 	Type  string
 	Value interface{}
 }

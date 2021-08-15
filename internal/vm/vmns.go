@@ -20,6 +20,17 @@ func (vm *VM) GetNS(name string) *NS {
 	return res
 }
 
+func (vm *VM) AsNS(name string) *NS {
+	var res *NS
+	if _res, ok := vm.NS.Load(name); ok {
+		vm.Debug("Returning NAMESPACE: %v", name)
+		res = _res.(*NS)
+		return res
+	}
+	vm.Debug("NAMESPACE in AsNS call not exists: %v", name)
+	return nil
+}
+
 func (vm *VM) EndNS() *NS {
 	var res *NS
 	if vm.NSStack.Len() > 0 {
