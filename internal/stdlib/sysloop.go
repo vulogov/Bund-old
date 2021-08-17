@@ -8,6 +8,35 @@ import (
 	vmmod "github.com/vulogov/Bund/internal/vm"
 )
 
+func LoopElement(vm *vmmod.VM, e *vmmod.Elem, criteria bool) (*vmmod.Elem, error) {
+	if e.Type == "CALL" {
+		for {
+			vmmod.EvalCmd(vm, e)
+			if vm.CanGet() {
+				res := vm.Take()
+				if res.Type == "bool" {
+					if res.Value.(bool) == criteria {
+						return nil, nil
+					}
+				} else {
+					return res, nil
+				}
+			}
+		}
+	} else {
+		return nil, fmt.Errorf("For 'IN' loop, we expecting CALL on top of the stack, not this: %v", e.Type)
+	}
+	return nil, nil
+}
+
+func WhileElement(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
+	return LoopElement(vm, e, false)
+}
+
+func UntilElement(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
+	return LoopElement(vm, e, true)
+}
+
 func InElement(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
 	if e.Type == "dblock" {
 		fmt.Println(e)
@@ -45,4 +74,6 @@ func InElement(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
 func InitLoopFunctions(vm *vmmod.VM) {
 	vm.Debug("[ BUND ] bund.InitLoopFunctions() reached")
 	vm.AddFunction("in", InElement)
+	vm.AddFunction("while", WhileElement)
+	vm.AddFunction("until", UntilElement)
 }

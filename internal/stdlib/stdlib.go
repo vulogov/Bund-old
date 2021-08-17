@@ -19,4 +19,5 @@ func InitFUNCTIONS(vm *vmmod.VM) {
 	InitGPMOperators(vm)
 	InitOpSys(vm)
 	InitOpZip(vm)
+	InitOpPercent(vm)
 }
