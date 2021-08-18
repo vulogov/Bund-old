@@ -7,3 +7,43 @@ Bund is an interpreted high-level general-purpose programming language. It is sh
 ## What the BUND is looks like ?
 
 ![Hello World](Documentation/HelloWorld.png)
+
+## How to I start ?
+
+First, you have to install BUND interpreter.
+
+### Compiling BUND interpreter from the source.
+
+To compile BUND interpreter from the source, you will be needed a GO language development toolset of version 1.16 or newer.
+
+```
+go version
+go version go1.16 darwin/amd64
+```
+
+Proceed to the https://github.com/vulogov/Bund and check-out most up-to date version of the BUND source code. There are number of GO packages you must have, but no worry, BUND Makefile will install them for you. Internet connectivity is required. After you check-out source code, you can execute make as
+
+```
+make
+```
+If after a while you will see something like that, then compilation was succesful.
+
+```
+=== Bund === [ cover-report     ]: generating coverage results...
+=== Bund === [ cover-report     ]:     ./coverage/coverage.html
+=== Bund === [ compile          ]: building commands:
+=== Bund === [ compile          ]:     ./bin/darwin/bund
+```
+
+Your copy of interpreter will be in ./bin/<os type>/bund . You can copy it anywhere in the PATH.
+
+### Get that HelloWorld running
+
+Proceed to the Documentation folder and read about basics of the BUND, what your HelloWorld program is made of and how to run it.
+
+https://github.com/vulogov/Bund/blob/master/Documentation/Bund%20_Hello%20world.pdf
+
+## And what's next
+
+Feel free to report any bugs or issues with BUND here https://github.com/vulogov/Bund/issues
+ 
