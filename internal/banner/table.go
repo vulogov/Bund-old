@@ -31,7 +31,10 @@ func Table() {
 	if *conf.VTable {
 		tab := table.Table{
 			Headers: []string{"Description", "Value"},
-			Rows:    [][]string{},
+			Rows: [][]string{
+				{"Version", conf.EVersion},
+				{"Extended version", conf.BVersion},
+			},
 		}
 		tab.WriteTable(os.Stdout, &cfg)
 	}
