@@ -27,3 +27,4 @@ pre:
 	go get github.com/ganbarodigital/go_glob
 	go get github.com/dustin/go-humanize
 	go get github.com/peterh/liner
+	go get github.com/goml/gobrain
