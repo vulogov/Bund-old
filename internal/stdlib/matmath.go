@@ -20,7 +20,7 @@ func MatMathOp(vm *vmmod.VM, e1 *vmmod.Elem, e2 *vmmod.Elem, op int) (*vmmod.Ele
 				if x1 != x2 && y1 != y2 {
 					return nil, fmt.Errorf("For the matrix math operations, matrixes must be the same arity: %v <-> %v %v <-> %v", x1, x2, y1, y2)
 				}
-				vm.Debug("MAT dimentions: %v=%v, %v=%v", x1, x2, y1, y2)
+				vm.Debug("MAT dimensions: %v=%v, %v=%v", x1, x2, y1, y2)
 				mres := mat.NewDense(x1, y1, nil)
 				switch op {
 				case add:
