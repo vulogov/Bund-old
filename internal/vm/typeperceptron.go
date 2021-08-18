@@ -55,7 +55,23 @@ func PctCompare(vm *VM, e1 *Elem, e2 *Elem) int {
 }
 
 func PctDup(vm *VM, e *Elem) *Elem {
-	return PctFactory(vm)
+	if e.Type == "PCT" {
+		res := PctFactory(vm)
+		pct := res.Value.(*PERCEPTRON)
+		pcte := e.Value.(*PERCEPTRON)
+		pct.T = pcte.T
+		pct.In = pcte.In
+		pct.Out = pcte.Out
+		pct.Hidden = pcte.Hidden
+		pct.Lerr = pcte.Lerr
+		pct.P.Init(pct.In, pct.Hidden, pct.Out)
+		pct.P.Train(pct.T, pct.Epoch, pct.Rate, pct.MFact, pct.Lerr)
+		if *conf.Debug {
+			pct.P.Test(pct.T)
+		}
+		return res
+	}
+	return nil
 }
 
 func RegisterPerceptron(vm *VM) {
