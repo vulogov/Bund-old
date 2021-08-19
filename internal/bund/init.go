@@ -9,6 +9,6 @@ import (
 
 func Init() {
 	tlog.Init()
-	log.Debug("[ BUND ] tsak.Init() is reached")
+	log.Debug("[ BUND ] bund.Init() is reached")
 	signal.InitSignal()
 }

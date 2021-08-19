@@ -10,7 +10,7 @@ import (
 
 func Eval() {
 	Init()
-	log.Debug("[ BUND ] tsak.Eval() is reached")
+	log.Debug("[ BUND ] bund.Eval() is reached")
 	if *conf.LexerPrint {
 		parse.LexerPrint(*conf.Expr)
 		return
