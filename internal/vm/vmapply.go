@@ -91,6 +91,8 @@ func ApplyInNS(name string, ns *NS, vm *VM) error {
 			EvalCmd(vm, cmd)
 		case "FUNCTION", "exitFUNCTION":
 			EvalCmd(vm, cmd)
+		case "UNIXCMD":
+			EvalCmd(vm, cmd)
 		default:
 			vm.Error("Unknown command in APPLY: %v", cmd)
 		}

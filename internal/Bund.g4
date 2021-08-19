@@ -40,6 +40,8 @@ term
     | lambda_term
     | operation_term
     | thing_term
+    | file_term
+    | unixcmd_term
   );
 
 data
@@ -74,6 +76,9 @@ float_term:   VALUE=(FLOAT_NUMBER|'+Inf'|'NaN'|'-Inf'|'Inf')('.(' FUNCTOR=(SYSF|
 string_term:  VALUE=STRING('.(' FUNCTOR=(SYSF|NAME) ')')? ;
 complex_term: VALUE=COMPLEX_NUMBER('.(' FUNCTOR=(SYSF|NAME) ')')? ;
 glob_term:    VALUE=GLOB('.(' FUNCTOR=(SYSF|NAME) ')')? ;
+file_term:    VALUE=URI('.(' FUNCTOR=(SYSF|NAME) ')')? ;
+unixcmd_term: VALUE=UNIXCMD('.(' FUNCTOR=(SYSF|NAME) ')')? ;
+
 
 mode_term:    VALUE=(TOBEGIN|TOEND) ;
 
@@ -177,6 +182,14 @@ GLOB
   : GLOB_PATTERN
   ;
 
+URI
+  : URI_PATTERN
+  ;
+
+UNIXCMD
+  : CMD_PATTERN
+  ;
+
 SEPARATE
   : '|'
   ;
@@ -225,6 +238,16 @@ fragment POINT_FLOAT
 fragment GLOB_PATTERN
   : 'g\'' ('\\' (RN | .) | ~[\\\r\n'])* '\''
   | 'g"'  ('\\' (RN | .) | ~[\\\r\n"])* '"'
+  ;
+
+fragment URI_PATTERN
+  : 'f\'' ('\\' (RN | .) | ~[\\\r\n'])* '\''
+  | 'f"'  ('\\' (RN | .) | ~[\\\r\n"])* '"'
+  ;
+
+fragment CMD_PATTERN
+  : '!\'' ('\\' (RN | .) | ~[\\\r\n'])* '\''
+  | '!"'  ('\\' (RN | .) | ~[\\\r\n"])* '"'
   ;
 
 fragment RN

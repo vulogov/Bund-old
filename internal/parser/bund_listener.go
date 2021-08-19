@@ -56,6 +56,12 @@ type BundListener interface {
 	// EnterGlob_term is called when entering the glob_term production.
 	EnterGlob_term(c *Glob_termContext)
 
+	// EnterFile_term is called when entering the file_term production.
+	EnterFile_term(c *File_termContext)
+
+	// EnterUnixcmd_term is called when entering the unixcmd_term production.
+	EnterUnixcmd_term(c *Unixcmd_termContext)
+
 	// EnterMode_term is called when entering the mode_term production.
 	EnterMode_term(c *Mode_termContext)
 
@@ -130,6 +136,12 @@ type BundListener interface {
 
 	// ExitGlob_term is called when exiting the glob_term production.
 	ExitGlob_term(c *Glob_termContext)
+
+	// ExitFile_term is called when exiting the file_term production.
+	ExitFile_term(c *File_termContext)
+
+	// ExitUnixcmd_term is called when exiting the unixcmd_term production.
+	ExitUnixcmd_term(c *Unixcmd_termContext)
 
 	// ExitMode_term is called when exiting the mode_term production.
 	ExitMode_term(c *Mode_termContext)

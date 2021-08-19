@@ -36,7 +36,7 @@ func GlobImport(vm *VM, args ...interface{}) {
 }
 
 func GlobExport(vm *VM, args ...interface{}) {
-	vm.Fatal("String Export not implemented")
+	vm.Fatal("Glob Export not implemented")
 }
 
 func InitOpcodeGlob(vm *VM) {

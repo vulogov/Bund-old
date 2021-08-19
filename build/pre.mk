@@ -28,3 +28,5 @@ pre:
 	go get github.com/dustin/go-humanize
 	go get github.com/peterh/liner
 	go get github.com/goml/gobrain
+	go get -u github.com/c2fo/vfs/v5/...
+	go get github.com/commander-cli/cmd

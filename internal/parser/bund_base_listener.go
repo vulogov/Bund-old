@@ -117,6 +117,18 @@ func (s *BaseBundListener) EnterGlob_term(ctx *Glob_termContext) {}
 // ExitGlob_term is called when production glob_term is exited.
 func (s *BaseBundListener) ExitGlob_term(ctx *Glob_termContext) {}
 
+// EnterFile_term is called when production file_term is entered.
+func (s *BaseBundListener) EnterFile_term(ctx *File_termContext) {}
+
+// ExitFile_term is called when production file_term is exited.
+func (s *BaseBundListener) ExitFile_term(ctx *File_termContext) {}
+
+// EnterUnixcmd_term is called when production unixcmd_term is entered.
+func (s *BaseBundListener) EnterUnixcmd_term(ctx *Unixcmd_termContext) {}
+
+// ExitUnixcmd_term is called when production unixcmd_term is exited.
+func (s *BaseBundListener) ExitUnixcmd_term(ctx *Unixcmd_termContext) {}
+
 // EnterMode_term is called when production mode_term is entered.
 func (s *BaseBundListener) EnterMode_term(ctx *Mode_termContext) {}
 
