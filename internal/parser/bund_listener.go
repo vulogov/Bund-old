@@ -62,6 +62,9 @@ type BundListener interface {
 	// EnterUnixcmd_term is called when entering the unixcmd_term production.
 	EnterUnixcmd_term(c *Unixcmd_termContext)
 
+	// EnterJson_term is called when entering the json_term production.
+	EnterJson_term(c *Json_termContext)
+
 	// EnterMode_term is called when entering the mode_term production.
 	EnterMode_term(c *Mode_termContext)
 
@@ -139,6 +142,9 @@ type BundListener interface {
 
 	// ExitUnixcmd_term is called when exiting the unixcmd_term production.
 	ExitUnixcmd_term(c *Unixcmd_termContext)
+
+	// ExitJson_term is called when exiting the json_term production.
+	ExitJson_term(c *Json_termContext)
 
 	// ExitMode_term is called when exiting the mode_term production.
 	ExitMode_term(c *Mode_termContext)

@@ -15,4 +15,5 @@ func (vm *VM) RegisterTypes() {
 	RegisterMatrix(vm)
 	RegisterPerceptron(vm)
 	RegisterFile(vm)
+	RegisterJson(vm)
 }

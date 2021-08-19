@@ -129,6 +129,12 @@ func (s *BaseBundListener) EnterUnixcmd_term(ctx *Unixcmd_termContext) {}
 // ExitUnixcmd_term is called when production unixcmd_term is exited.
 func (s *BaseBundListener) ExitUnixcmd_term(ctx *Unixcmd_termContext) {}
 
+// EnterJson_term is called when production json_term is entered.
+func (s *BaseBundListener) EnterJson_term(ctx *Json_termContext) {}
+
+// ExitJson_term is called when production json_term is exited.
+func (s *BaseBundListener) ExitJson_term(ctx *Json_termContext) {}
+
 // EnterMode_term is called when production mode_term is entered.
 func (s *BaseBundListener) EnterMode_term(ctx *Mode_termContext) {}
 

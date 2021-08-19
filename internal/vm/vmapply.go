@@ -77,7 +77,7 @@ func ApplyInNS(name string, ns *NS, vm *VM) error {
 			continue
 		}
 		switch cmd.Type {
-		case "int", "flt", "str", "bool", "cpx", "glob":
+		case "int", "flt", "str", "bool", "cpx", "glob", "file", "json":
 			vm.Debug("DATA: %v", cmd)
 			if cmd.Functor != "" {
 				vm.Debug("Evaluating functor %v for %v in lambda execution", cmd.Functor, cmd.Type)

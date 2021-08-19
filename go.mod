@@ -8,6 +8,7 @@ require (
 	github.com/Azure/azure-storage-blob-go v0.14.0 // indirect
 	github.com/Azure/go-autorest/autorest v0.11.19 // indirect
 	github.com/Azure/go-autorest/autorest/adal v0.9.14 // indirect
+	github.com/Jeffail/gabs/v2 v2.6.1
 	github.com/antlr/antlr4/runtime/Go/antlr v0.0.0-20210803070921-b358b509191a
 	github.com/aws/aws-sdk-go v1.40.26 // indirect
 	github.com/c2fo/vfs/v5 v5.7.0

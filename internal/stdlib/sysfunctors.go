@@ -26,6 +26,16 @@ func FileFunctor(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
 	return e, nil
 }
 
+func JsonFunctor(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
+	vm.Debug("JSON FUNCTOR: %v", e.Type)
+	if e.Type == "str" {
+		eh, err := vm.GetType("json")
+		vm.OnError(err, "Error in json functor")
+		return eh.FromString(vm, e.Value.(string)), nil
+	}
+	return e, nil
+}
+
 func UnixFunctor(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
 	vm.Debug("UNIXCMD FUNCTOR: %v", e.Type)
 	if e.Type == "str" {
@@ -43,4 +53,5 @@ func InitFunctorFunctions(vm *vmmod.VM) {
 	vm.AddFunction("glob", GlobFunctor)
 	vm.AddFunction("file", FileFunctor)
 	vm.AddFunction("unix", UnixFunctor)
+	vm.AddFunction("json", JsonFunctor)
 }

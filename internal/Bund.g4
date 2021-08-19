@@ -41,6 +41,7 @@ term
     | operation_term
     | file_term
     | unixcmd_term
+    | json_term
   );
 
 data
@@ -76,6 +77,7 @@ complex_term: VALUE=COMPLEX_NUMBER(':(' FUNCTOR=(SYSF|NAME) ')')? ;
 glob_term:    VALUE=GLOB(':(' FUNCTOR=(SYSF|NAME) ')')? ;
 file_term:    VALUE=URI(':(' FUNCTOR=(SYSF|NAME) ')')? ;
 unixcmd_term: VALUE=UNIXCMD(':(' FUNCTOR=(SYSF|NAME) ')')? ;
+json_term:    VALUE=JSON(':(' FUNCTOR=(SYSF|NAME) ')')? ;
 
 
 mode_term:    VALUE=(TOBEGIN|TOEND) ;
@@ -184,6 +186,10 @@ UNIXCMD
   : CMD_PATTERN
   ;
 
+JSON
+  : JSON_PATTERN
+  ;
+
 SEPARATE
   : '|'
   ;
@@ -242,6 +248,11 @@ fragment URI_PATTERN
 fragment CMD_PATTERN
   : '!\'' ('\\' (RN | .) | ~[\\\r\n'])* '\''
   | '!"'  ('\\' (RN | .) | ~[\\\r\n"])* '"'
+  ;
+
+fragment JSON_PATTERN
+  : 'j\'' ('\\' (RN | .) | ~[\\\r\n'])* '\''
+  | 'j"'  ('\\' (RN | .) | ~[\\\r\n"])* '"'
   ;
 
 fragment RN
