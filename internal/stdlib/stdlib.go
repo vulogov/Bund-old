@@ -17,6 +17,7 @@ func InitFUNCTIONS(vm *vmmod.VM) {
 	InitPctFunctions(vm)
 	InitVFSFunctions(vm)
 	InitStringFunctions(vm)
+	InitFunctorFunctions(vm)
 	InitOpMath(vm)
 	InitOpCmp(vm)
 	InitGPMOperators(vm)

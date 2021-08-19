@@ -35,6 +35,9 @@ func (vm *VM) runop(t string, args ...interface{}) {
 		if err != nil {
 			vm.OnError(err, "Error placing in lambda: %v", t)
 		}
+		if len(args) == 2 && len(args[1].(string)) > 0 {
+			res.Functor = args[1].(string)
+		}
 		ls := vm.CurrentLambda()
 		if ls != nil {
 			vm.Debug("TO f(%v) %v", vm.CurrentNS.NameOfCurrentLambda(), res)

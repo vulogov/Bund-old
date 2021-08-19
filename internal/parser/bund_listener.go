@@ -86,9 +86,6 @@ type BundListener interface {
 	// EnterOperation_term is called when entering the operation_term production.
 	EnterOperation_term(c *Operation_termContext)
 
-	// EnterThing_term is called when entering the thing_term production.
-	EnterThing_term(c *Thing_termContext)
-
 	// ExitExpressions is called when exiting the expressions production.
 	ExitExpressions(c *ExpressionsContext)
 
@@ -166,7 +163,4 @@ type BundListener interface {
 
 	// ExitOperation_term is called when exiting the operation_term production.
 	ExitOperation_term(c *Operation_termContext)
-
-	// ExitThing_term is called when exiting the thing_term production.
-	ExitThing_term(c *Thing_termContext)
 }
