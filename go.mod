@@ -31,13 +31,13 @@ require (
 	github.com/rivo/uniseg v0.2.0 // indirect
 	github.com/tomlazar/table v0.1.0
 	golang.org/x/crypto v0.0.0-20210817164053-32db794688a5 // indirect
-	golang.org/x/exp v0.0.0-20210817205419-cf631fceb1a5 // indirect
+	golang.org/x/exp v0.0.0-20210819164307-503510c5c1ec // indirect
 	golang.org/x/net v0.0.0-20210813160813-60bc85c4be6d // indirect
 	golang.org/x/oauth2 v0.0.0-20210817223510-7df4dd6e12ab // indirect
-	golang.org/x/sys v0.0.0-20210818153620-00dd8d7831e7 // indirect
+	golang.org/x/sys v0.0.0-20210819135213-f52c844e1c1c // indirect
 	golang.org/x/text v0.3.7 // indirect
 	gonum.org/v1/gonum v0.9.3
-	google.golang.org/genproto v0.0.0-20210818220304-27ea9cc85d9f // indirect
+	google.golang.org/genproto v0.0.0-20210819152826-bb2f42df81c9 // indirect
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
 )
