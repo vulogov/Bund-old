@@ -25,7 +25,8 @@ func signalHandler() {
 
 func ExitRequest() {
 	log.Debug(fmt.Sprintf("Exit requested. N=%d", ng))
-	for i := 0; i < ng; i++ {
+	exitChan <- true
+	for i := 1; i < ng; i++ {
 		exitChan <- true
 	}
 }

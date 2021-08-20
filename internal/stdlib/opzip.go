@@ -53,6 +53,12 @@ func ZipOperator(vm *vmmod.VM, e1 *vmmod.Elem, e2 *vmmod.Elem) (*vmmod.Elem, err
 			default:
 				return nil, fmt.Errorf("Non-mergeable types for '++': %v %v", e1.Type, e2.Type)
 			}
+		case "json":
+			switch e2.Type {
+			case "dblock":
+				vm.Put(e2)
+				return JsonSetElement(vm, e1)
+			}
 		default:
 			return nil, fmt.Errorf("I finally do not know how to perform '++' for this data: %v %v", e1.Type, e2.Type)
 		}

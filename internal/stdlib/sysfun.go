@@ -111,9 +111,12 @@ func SleepFun(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
 	var d int
 	switch e.Type {
 	case "int":
-		d = int(e.Value.(*big.Int).Mul(e.Value.(*big.Int), big.NewInt(1000000000)).Int64())
+		res := big.NewInt(0)
+		d = int(res.Mul(e.Value.(*big.Int), big.NewInt(1000000000)).Int64())
+		// d = int(e.Value.(*big.Int).Uint64())
 	case "flt":
-		d = int(e.Value.(float64) * 1000000000)
+		d = int(e.Value.(float64) * float64(1000000000))
+		// d = int(e.Value.(float64))
 	default:
 		return nil, fmt.Errorf("Parameter for 'sleep' is not float or int: %v", e.Type)
 	}

@@ -1,0 +1,6 @@
+(
+    'Hello World'
+    'file:///tmp/file':(file)
+    fs/File/Write fs/File/Close
+    fs/File/Read println
+)

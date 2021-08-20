@@ -1,0 +1,9 @@
+/*
+ Create JSON object with functor, datatype and using function
+*/
+
+(
+  '{"answer": 41}':(json)   println
+  j'{"answer": 42}'         println
+  '{"answer": 43}'          json/New println
+)
