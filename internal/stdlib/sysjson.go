@@ -5,9 +5,51 @@ import (
 	"math/big"
 
 	"github.com/Jeffail/gabs/v2"
+	"github.com/gammazero/deque"
 
 	vmmod "github.com/vulogov/Bund/internal/vm"
 )
+
+func JsonArrayGetElement(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
+	vm.Debug("json/Array/Get: %v", e.Type)
+	if e.Type == "json" {
+		if !vm.CanGet() {
+			return nil, fmt.Errorf("Stack is too shallow for json/Array/Get")
+		}
+		j := e.Value.(*gabs.Container)
+		d := vm.Take()
+		if d.Type != "str" {
+			return nil, fmt.Errorf("string is expected for json/Array/Set")
+		}
+		if !j.ExistsP(d.Value.(string)) {
+			return nil, fmt.Errorf("Key %v not found in JSON", d.Value.(string))
+		}
+		vm.Put(e)
+		eh, err := vm.GetType("dblock")
+		vm.OnError(err, "Error in json/Array/Get")
+		res := eh.Factory(vm)
+		q := res.Value.(*deque.Deque)
+		for _, child := range j.Path(d.Value.(string)).Children() {
+			v := child.Data()
+			switch v.(type) {
+			case int:
+				q.PushBack(&vmmod.Elem{Type: "int", Value: big.NewInt(int64(v.(int)))})
+			case int64:
+				q.PushBack(&vmmod.Elem{Type: "int", Value: big.NewInt(v.(int64))})
+			case float32:
+				q.PushBack(&vmmod.Elem{Type: "flt", Value: float64(v.(float32))})
+			case float64:
+				q.PushBack(&vmmod.Elem{Type: "flt", Value: float64(v.(float64))})
+			case string:
+				q.PushBack(&vmmod.Elem{Type: "str", Value: string(v.(string))})
+			default:
+				return nil, fmt.Errorf("Unsupported data in JSON while in json/Value/Get")
+			}
+		}
+		return res, nil
+	}
+	return e, nil
+}
 
 func JsonArrayAddElement(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
 	vm.Debug("json/Array/Add: %v", e.Type)
@@ -150,5 +192,5 @@ func InitJsonFunctions(vm *vmmod.VM) {
 	vm.AddFunction("json/Value/Get", JsonGetElement)
 	vm.AddFunction("json/Array/New", JsonArrayNewElement)
 	vm.AddFunction("json/Array/Add", JsonArrayAddElement)
-
+	vm.AddFunction("json/Array/Get", JsonArrayGetElement)
 }

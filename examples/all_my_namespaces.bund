@@ -1,0 +1,18 @@
+##
+## In this example, I am showing how you can switch between stacks
+##
+
+[ main :
+  3
+  [ stack1 :
+    21
+  ;;
+  2
+  [ stack1 :
+    2
+  ;;
+  * println
+  [ stack1 :
+    * println 
+  ;;
+;;

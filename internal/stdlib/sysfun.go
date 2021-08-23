@@ -113,10 +113,8 @@ func SleepFun(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
 	case "int":
 		res := big.NewInt(0)
 		d = int(res.Mul(e.Value.(*big.Int), big.NewInt(1000000000)).Int64())
-		// d = int(e.Value.(*big.Int).Uint64())
 	case "flt":
 		d = int(e.Value.(float64) * float64(1000000000))
-		// d = int(e.Value.(float64))
 	default:
 		return nil, fmt.Errorf("Parameter for 'sleep' is not float or int: %v", e.Type)
 	}
@@ -135,6 +133,11 @@ func ExitFun(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
 	return nil, nil
 }
 
+func NameFun(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
+	vm.Put(e)
+	return &vmmod.Elem{Type: "str", Value: vm.CurrentNS.Name}, nil
+}
+
 func InitSystemFunctions(vm *vmmod.VM) {
 	vm.Debug("[ BUND ] bund.InitSystemFunctions() reached")
 	vm.AddFunction("passthrough", PassthrougElement)
@@ -145,8 +148,10 @@ func InitSystemFunctions(vm *vmmod.VM) {
 	vm.AddFunction("^", DupElement)
 	vm.AddFunction("!", ExecuteElement)
 	vm.AddFunction("setAlias", SetAlias)
+	vm.AddFunction("≡", SetAlias)
 	vm.AddFunction("alias", GetAlias)
 	vm.AddFunction("#", RefElement)
 	vm.AddFunction("sleep", SleepFun)
+	vm.AddFunction("name", NameFun)
 	vm.AddFunction("exit", ExitFun)
 }

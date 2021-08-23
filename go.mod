@@ -10,7 +10,7 @@ require (
 	github.com/Azure/go-autorest/autorest/adal v0.9.14 // indirect
 	github.com/Jeffail/gabs/v2 v2.6.1
 	github.com/antlr/antlr4/runtime/Go/antlr v0.0.0-20210803070921-b358b509191a
-	github.com/aws/aws-sdk-go v1.40.26 // indirect
+	github.com/aws/aws-sdk-go v1.40.27 // indirect
 	github.com/c2fo/vfs/v5 v5.7.0
 	github.com/commander-cli/cmd v1.3.0
 	github.com/common-nighthawk/go-figure v0.0.0-20210622060536-734e95fb86be
@@ -38,7 +38,7 @@ require (
 	golang.org/x/sys v0.0.0-20210820121016-41cdb8703e55 // indirect
 	golang.org/x/text v0.3.7 // indirect
 	gonum.org/v1/gonum v0.9.3
-	google.golang.org/genproto v0.0.0-20210820002220-43fce44e7af1 // indirect
+	google.golang.org/genproto v0.0.0-20210821163610-241b8fcbd6c8 // indirect
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
 )

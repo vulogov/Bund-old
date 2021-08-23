@@ -59,15 +59,15 @@ data
   );
 
 call_term
-  : VALUE=(SYSF|NAME) (':(' FUNCTOR=(SYS|NAME) ')')?
+  : VALUE=(SYSF|NAME) (':(' FUNCTOR=(SYS|SYSF|NAME) ')')?
   ;
 
 operator_term
-  : VALUE=CMD (':(' FUNCTOR=(SYS|NAME) ')')?
+  : VALUE=CMD (':(' FUNCTOR=(SYS|SYSF|NAME) ')')?
   ;
 
-ref_call_term:     '`' VALUE=(SYSF|NAME) ;
-ref_operator_term: '`' VALUE=CMD ;
+ref_call_term:     '`' VALUE=(SYSF|NAME) (':(' FUNCTOR=(SYS|SYSF|NAME) ')')? ;
+ref_operator_term: '`' VALUE=CMD (':(' FUNCTOR=(SYS|SYSF|NAME) ')')? ;
 
 boolean_term: VALUE=(TRUE|FALSE)(':(' FUNCTOR=(SYSF|NAME) ')')? ;
 integer_term: VALUE=INTEGER(':(' FUNCTOR=(SYSF|NAME) ')')? ;
@@ -162,7 +162,7 @@ CMD
   ;
 
 SYSF
-  : ('∧'|'∨'|'#'|','|'$'|'^'|'_'|'!'|'¬')+
+  : ('∧'|'∨'|'#'|','|'$'|'^'|'_'|'!'|'¬'|'∀')+
   ;
 
 SLASH:   '/' ;
@@ -196,7 +196,7 @@ SEPARATE
 
 
 COMMENT
-  : '##' ~[\r\n]* -> skip
+  : '##'  .*? [\r\n] -> skip
   ;
 BLOCK_COMMENT
   :   '/*' .*? '*/' -> skip
