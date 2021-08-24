@@ -11,8 +11,11 @@
 ```
 - JSON now is a datatype and have a functor for converting the strings
 - JSON querying and generation functions as json/*
+- new functor "all" - executing operations over all content of  the stack
+- new loop "loop" - running loop until externally interrupted
 
 # Bugfixes
 
 - Fixing typos in MAT matrix files
 - Fix bug in sleep function causing overflow if sleep specified in integers
+- Fix the fact that \` references was declared, but not implemented

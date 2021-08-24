@@ -1,0 +1,10 @@
+#!./bin/darwin/bund run --main
+##
+## In this example, we do non-destructive returnFrom
+##
+
+(
+  [main: 42 ;;
+  'main' _$$ println
+  [main: println ;;
+)

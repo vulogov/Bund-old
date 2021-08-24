@@ -31,3 +31,4 @@ pre:
 	go get -u github.com/c2fo/vfs/v5/...
 	go get github.com/commander-cli/cmd
 	go get github.com/Jeffail/gabs/v2
+	go get github.com/cosiner/argv

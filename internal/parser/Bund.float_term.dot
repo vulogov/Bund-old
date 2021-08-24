@@ -1,0 +1,19 @@
+digraph ATN {
+rankdir=LR;
+s25[fontsize=11, label="25", shape=doublecircle, fixedsize=true, width=.6];
+s160[fontsize=11,label="160", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s161[fontsize=11,label="161", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s162[fontsize=11,label="162", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s163[fontsize=11,label="163", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s164[fontsize=11,label="{&rarr;\n164\nd=12|{<p0>|<p1>}}", shape=record, fixedsize=false, peripheries=1];
+s165[fontsize=11,label="&larr;\n165", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s24[fontsize=11,label="24", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s24 -> s160 [fontname="Times-Italic", label="&epsilon;"];
+s160 -> s164 [fontsize=11, fontname="Courier", arrowsize=.7, label = "{'+Inf', 'NaN', '-Inf', 'Inf', FLOAT_NUMBER}", arrowhead = normal];
+s164:p0 -> s161 [fontname="Times-Italic", label="&epsilon;"];
+s164:p1 -> s165 [fontname="Times-Italic", label="&epsilon;"];
+s161 -> s162 [fontsize=11, fontname="Courier", arrowsize=.7, label = "':('", arrowhead = normal];
+s165 -> s25 [fontname="Times-Italic", label="&epsilon;"];
+s162 -> s163 [fontsize=11, fontname="Courier", arrowsize=.7, label = "{SYSF, NAME}", arrowhead = normal];
+s163 -> s165 [fontsize=11, fontname="Courier", arrowsize=.7, label = "')'", arrowhead = normal];
+}

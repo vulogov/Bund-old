@@ -1,0 +1,19 @@
+digraph ATN {
+rankdir=LR;
+s15[fontsize=11, label="15", shape=doublecircle, fixedsize=true, width=.6];
+s128[fontsize=11,label="128", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s129[fontsize=11,label="129", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s130[fontsize=11,label="130", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s131[fontsize=11,label="131", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s132[fontsize=11,label="{&rarr;\n132\nd=7|{<p0>|<p1>}}", shape=record, fixedsize=false, peripheries=1];
+s133[fontsize=11,label="&larr;\n133", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s14[fontsize=11,label="14", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s14 -> s128 [fontname="Times-Italic", label="&epsilon;"];
+s128 -> s132 [fontsize=11, fontname="Courier", arrowsize=.7, label = "CMD", arrowhead = normal];
+s132:p0 -> s129 [fontname="Times-Italic", label="&epsilon;"];
+s132:p1 -> s133 [fontname="Times-Italic", label="&epsilon;"];
+s129 -> s130 [fontsize=11, fontname="Courier", arrowsize=.7, label = "':('", arrowhead = normal];
+s133 -> s15 [fontname="Times-Italic", label="&epsilon;"];
+s130 -> s131 [fontsize=11, fontname="Courier", arrowsize=.7, label = "{SYS, SYSF, NAME}", arrowhead = normal];
+s131 -> s133 [fontsize=11, fontname="Courier", arrowsize=.7, label = "')'", arrowhead = normal];
+}
