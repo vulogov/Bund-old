@@ -13,6 +13,11 @@
 - JSON querying and generation functions as json/*
 - new functor "all" - executing operations over all content of  the stack
 - new loop "loop" - running loop until externally interrupted
+- new functions in args* tree. They will query what you pass through --args
+- new loop function 'times' which call function n times
+- new loop function 'over' which pushes data from (* ) to stack and call function
+- new function 'type' returns name of the type of data element on the stack
+- new function 'seq' - generating sequence of the values in DBLOCK
 
 # Bugfixes
 

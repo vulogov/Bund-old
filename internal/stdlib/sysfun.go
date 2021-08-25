@@ -6,6 +6,8 @@ import (
 	"os"
 	"time"
 
+	"github.com/gammazero/deque"
+
 	vmmod "github.com/vulogov/Bund/internal/vm"
 )
 
@@ -138,6 +140,26 @@ func NameFun(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
 	return &vmmod.Elem{Type: "str", Value: vm.CurrentNS.Name}, nil
 }
 
+func TypeFun(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
+	vm.Put(e)
+	return &vmmod.Elem{Type: "str", Value: e.Type}, nil
+}
+
+func SeqFun(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
+	if e.Type == "int" {
+		eh, err := vm.GetType("dblock")
+		vm.OnError(err, "Error in 'seq'")
+		res := eh.Factory(vm)
+		q := res.Value.(*deque.Deque)
+		c := int(e.Value.(*big.Int).Int64())
+		for i := 0; i < c; i++ {
+			q.PushBack(&vmmod.Elem{Type: "int", Value: big.NewInt(int64(i))})
+		}
+		return res, nil
+	}
+	return nil, fmt.Errorf("Exit function require a number in stack: %v", e.Type)
+}
+
 func InitSystemFunctions(vm *vmmod.VM) {
 	vm.Debug("[ BUND ] bund.InitSystemFunctions() reached")
 	vm.AddFunction("passthrough", PassthrougElement)
@@ -153,5 +175,7 @@ func InitSystemFunctions(vm *vmmod.VM) {
 	vm.AddFunction("#", RefElement)
 	vm.AddFunction("sleep", SleepFun)
 	vm.AddFunction("name", NameFun)
+	vm.AddFunction("type", TypeFun)
+	vm.AddFunction("seq", SeqFun)
 	vm.AddFunction("exit", ExitFun)
 }

@@ -1,0 +1,16 @@
+(
+  [ fibonacci ]
+    ^ 2 <
+    (false
+      ,
+      ^
+      1 <=> - fibonacci <=>
+      2 <=> - fibonacci
+      +
+    )
+    (true
+      ,
+    )
+  .
+  21 ^ (* ) ++ <=> fibonacci ++ 'Fibonacci is %v for %v' ++ console/Println
+)

@@ -3,11 +3,11 @@
 ##
 
 (
-  0 ^
+  0 ^ ^
   arg/Len println
   <
     (true
-      , arg/Slice/Len println
-      0 arg println
+      , arg/Slice/Len println ,
+      arg println
     )
 )
