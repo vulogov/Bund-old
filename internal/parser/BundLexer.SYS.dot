@@ -1,17 +1,17 @@
 digraph ATN {
 rankdir=LR;
-s54[fontsize=11, label="54", shape=doublecircle, fixedsize=true, width=.6];
-s53[fontsize=11,label="53", shape=circle, fixedsize=true, width=.55, peripheries=1];
-s261[fontsize=11,label="261", shape=circle, fixedsize=true, width=.55, peripheries=1];
-s262[fontsize=11,label="&rarr;\n262+", shape=circle, fixedsize=true, width=.55, peripheries=1];
-s263[fontsize=11,label="&larr;\n263", shape=circle, fixedsize=true, width=.55, peripheries=1];
-s264[fontsize=11,label="{264+\nd=8|{<p0>|<p1>}}", shape=record, fixedsize=false, peripheries=1];
+s56[fontsize=11, label="56", shape=doublecircle, fixedsize=true, width=.6];
+s55[fontsize=11,label="55", shape=circle, fixedsize=true, width=.55, peripheries=1];
 s265[fontsize=11,label="265", shape=circle, fixedsize=true, width=.55, peripheries=1];
-s53 -> s262 [fontname="Times-Italic", label="&epsilon;"];
-s262 -> s261 [fontname="Times-Italic", label="&epsilon;"];
-s261 -> s263 [fontsize=11, fontname="Courier", arrowsize=.7, label = "{'%', '?'..'@', '_'}", arrowhead = normal];
-s263 -> s264 [fontname="Times-Italic", label="&epsilon;"];
-s264:p0 -> s262 [fontname="Times-Italic", label="&epsilon;", style="dashed"];
-s264:p1 -> s265 [fontname="Times-Italic", label="&epsilon;"];
-s265 -> s54 [fontname="Times-Italic", label="&epsilon;"];
+s266[fontsize=11,label="&rarr;\n266+", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s267[fontsize=11,label="&larr;\n267", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s268[fontsize=11,label="{268+\nd=8|{<p0>|<p1>}}", shape=record, fixedsize=false, peripheries=1];
+s269[fontsize=11,label="269", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s55 -> s266 [fontname="Times-Italic", label="&epsilon;"];
+s266 -> s265 [fontname="Times-Italic", label="&epsilon;"];
+s265 -> s267 [fontsize=11, fontname="Courier", arrowsize=.7, label = "{'%', '?'..'@', '_'}", arrowhead = normal];
+s267 -> s268 [fontname="Times-Italic", label="&epsilon;"];
+s268:p0 -> s266 [fontname="Times-Italic", label="&epsilon;", style="dashed"];
+s268:p1 -> s269 [fontname="Times-Italic", label="&epsilon;"];
+s269 -> s56 [fontname="Times-Italic", label="&epsilon;"];
 }

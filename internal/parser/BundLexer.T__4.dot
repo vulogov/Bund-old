@@ -2,11 +2,11 @@ digraph ATN {
 rankdir=LR;
 s10[fontsize=11, label="10", shape=doublecircle, fixedsize=true, width=.6];
 s128[fontsize=11,label="128", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s129[fontsize=11,label="129", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s130[fontsize=11,label="130", shape=circle, fixedsize=true, width=.55, peripheries=1];
 s9[fontsize=11,label="9", shape=circle, fixedsize=true, width=.55, peripheries=1];
-s126[fontsize=11,label="126", shape=circle, fixedsize=true, width=.55, peripheries=1];
-s127[fontsize=11,label="127", shape=circle, fixedsize=true, width=.55, peripheries=1];
-s9 -> s126 [fontname="Times-Italic", label="&epsilon;"];
-s126 -> s127 [fontsize=11, fontname="Courier", arrowsize=.7, label = "':'", arrowhead = normal];
-s127 -> s128 [fontsize=11, fontname="Courier", arrowsize=.7, label = "'('", arrowhead = normal];
-s128 -> s10 [fontname="Times-Italic", label="&epsilon;"];
+s9 -> s128 [fontname="Times-Italic", label="&epsilon;"];
+s128 -> s129 [fontsize=11, fontname="Courier", arrowsize=.7, label = "':'", arrowhead = normal];
+s129 -> s130 [fontsize=11, fontname="Courier", arrowsize=.7, label = "'('", arrowhead = normal];
+s130 -> s10 [fontname="Times-Italic", label="&epsilon;"];
 }

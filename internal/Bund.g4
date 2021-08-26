@@ -72,7 +72,7 @@ ref_operator_term: '`' VALUE=CMD (':(' FUNCTOR=(SYS|SYSF|NAME) ')')? ;
 boolean_term: VALUE=(TRUE|FALSE)(':(' FUNCTOR=(SYSF|NAME) ')')? ;
 integer_term: VALUE=INTEGER(':(' FUNCTOR=(SYSF|NAME) ')')? ;
 float_term:   VALUE=(FLOAT_NUMBER|'+Inf'|'NaN'|'-Inf'|'Inf')(':(' FUNCTOR=(SYSF|NAME) ')')? ;
-string_term:  VALUE=STRING(':(' FUNCTOR=(SYSF|NAME) ')')? ;
+string_term:  (PRE=NAME '@')? VALUE=STRING(':(' FUNCTOR=(SYSF|NAME) ')')? ;
 complex_term: VALUE=COMPLEX_NUMBER(':(' FUNCTOR=(SYSF|NAME) ')')? ;
 glob_term:    VALUE=GLOB(':(' FUNCTOR=(SYSF|NAME) ')')? ;
 file_term:    VALUE=URI(':(' FUNCTOR=(SYSF|NAME) ')')? ;

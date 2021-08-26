@@ -16,6 +16,20 @@ func PassthrougElement(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
 	return e, nil
 }
 
+func RotateFrontElement(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
+	vm.Put(e)
+	q := vm.Current
+	q.Rotate(1)
+	return nil, nil
+}
+
+func RotateBackElement(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
+	vm.Put(e)
+	q := vm.Current
+	q.Rotate(-1)
+	return nil, nil
+}
+
 func PrintStack(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
 	vm.Debug("PRINTSTACK: %v", e.Type)
 	vm.Put(e)
@@ -178,4 +192,7 @@ func InitSystemFunctions(vm *vmmod.VM) {
 	vm.AddFunction("type", TypeFun)
 	vm.AddFunction("seq", SeqFun)
 	vm.AddFunction("exit", ExitFun)
+	vm.AddFunction("rotateFront", RotateFrontElement)
+	vm.AddFunction("rotate", RotateFrontElement)
+	vm.AddFunction("rotateBack", RotateBackElement)
 }

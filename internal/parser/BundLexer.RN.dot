@@ -1,17 +1,17 @@
 digraph ATN {
 rankdir=LR;
-s106[fontsize=11, label="106", shape=doublecircle, fixedsize=true, width=.6];
-s545[fontsize=11,label="545", shape=circle, fixedsize=true, width=.55, peripheries=1];
-s546[fontsize=11,label="{&rarr;\n546\nd=60|{<p0>|<p1>}}", shape=record, fixedsize=false, peripheries=1];
-s547[fontsize=11,label="&larr;\n547", shape=circle, fixedsize=true, width=.55, peripheries=1];
-s548[fontsize=11,label="548", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s108[fontsize=11, label="108", shape=doublecircle, fixedsize=true, width=.6];
 s549[fontsize=11,label="549", shape=circle, fixedsize=true, width=.55, peripheries=1];
-s105[fontsize=11,label="105", shape=circle, fixedsize=true, width=.55, peripheries=1];
-s105 -> s546 [fontname="Times-Italic", label="&epsilon;"];
-s546:p0 -> s545 [fontname="Times-Italic", label="&epsilon;"];
-s546:p1 -> s547 [fontname="Times-Italic", label="&epsilon;"];
-s545 -> s547 [fontsize=11, fontname="Courier", arrowsize=.7, label = "''", arrowhead = normal];
-s547 -> s548 [fontname="Times-Italic", label="&epsilon;"];
-s548 -> s549 [fontsize=11, fontname="Courier", arrowsize=.7, label = "'\\\\n'", arrowhead = normal];
-s549 -> s106 [fontname="Times-Italic", label="&epsilon;"];
+s550[fontsize=11,label="{&rarr;\n550\nd=60|{<p0>|<p1>}}", shape=record, fixedsize=false, peripheries=1];
+s551[fontsize=11,label="&larr;\n551", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s552[fontsize=11,label="552", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s553[fontsize=11,label="553", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s107[fontsize=11,label="107", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s107 -> s550 [fontname="Times-Italic", label="&epsilon;"];
+s550:p0 -> s549 [fontname="Times-Italic", label="&epsilon;"];
+s550:p1 -> s551 [fontname="Times-Italic", label="&epsilon;"];
+s549 -> s551 [fontsize=11, fontname="Courier", arrowsize=.7, label = "''", arrowhead = normal];
+s551 -> s552 [fontname="Times-Italic", label="&epsilon;"];
+s552 -> s553 [fontsize=11, fontname="Courier", arrowsize=.7, label = "'\\\\n'", arrowhead = normal];
+s553 -> s108 [fontname="Times-Italic", label="&epsilon;"];
 }

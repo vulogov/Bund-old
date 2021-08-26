@@ -32,6 +32,13 @@ func EvalCmd(vm *VM, cmd *Elem) {
 	}
 }
 
+func (vm *VM) EvalCmd(cmd *Elem) {
+	if vm.CheckIgnore() {
+		return
+	}
+	EvalCmd(vm, cmd)
+}
+
 func SimpleEvalCmd(vm *VM, cmd *Elem) {
 	oh := vm.Opcode(cmd.Type)
 	if oh != nil {

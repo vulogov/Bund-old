@@ -18,6 +18,7 @@
 - new loop function 'over' which pushes data from (* ) to stack and call function
 - new function 'type' returns name of the type of data element on the stack
 - new function 'seq' - generating sequence of the values in DBLOCK
+- new function 'rotateFront'/'rotate', 'rotateBack' - rotating the stack front to back or back to front
 
 # Bugfixes
 

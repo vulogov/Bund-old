@@ -32,3 +32,4 @@ pre:
 	go get github.com/commander-cli/cmd
 	go get github.com/Jeffail/gabs/v2
 	go get github.com/cosiner/argv
+	go get github.com/levigross/grequests
