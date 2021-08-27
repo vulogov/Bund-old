@@ -19,6 +19,10 @@
 - new function 'type' returns name of the type of data element on the stack
 - new function 'seq' - generating sequence of the values in DBLOCK
 - new function 'rotateFront'/'rotate', 'rotateBack' - rotating the stack front to back or back to front
+- new datatype and opcode http
+- string datatype supports pre-function feature
+- data retrieval from remote http/https endpoints
+- http* functions for retrieval from remote http/https endpoints
 
 # Bugfixes
 

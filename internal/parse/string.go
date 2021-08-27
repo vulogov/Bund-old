@@ -54,12 +54,12 @@ func (l *bundExecListener) EnterString_term(c *parser.String_termContext) {
 			l.VM.RunOp(prefunction, tstring, functor)
 			return
 		}
-		f := l.VM.GetFunction(prefunction)
+		f, _ := l.VM.GetFunction(prefunction)
 		if f != nil {
 			l.VM.Debug("Embedded Function %v is found. Pass string to that function", prefunction)
 			eh, err := l.VM.GetType("str")
 			l.VM.OnError(err, "Error in string prefunction compute")
-			v := eh.Factory(l.VM, tstring)
+			v := eh.FromString(l.VM, tstring)
 			v.Functor = functor
 			res, err := f(l.VM, v)
 			l.VM.OnError(err, "Error calling %v", prefunction)
@@ -68,6 +68,7 @@ func (l *bundExecListener) EnterString_term(c *parser.String_termContext) {
 			} else {
 				l.VM.Warning("Prefunction %v returned NULL", prefunction)
 			}
+			return
 		}
 		l.VM.Debug("Prefunction %v not found, continue as string", prefunction)
 		l.VM.RunOp("str", tstring, functor)
