@@ -1,0 +1,7 @@
+(
+  [ a :
+    [ans] 42 .  /* Defining function "ans" in namespace "a"
+  ;;
+  'ans' 'a' ->  /* Importing function 'ans' from namespace 'a' to current namespace */
+  ans println   /* Calling the function */
+)
