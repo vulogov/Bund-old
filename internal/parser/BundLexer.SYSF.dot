@@ -9,7 +9,7 @@ s279[fontsize=11,label="279", shape=circle, fixedsize=true, width=.55, peripheri
 s59[fontsize=11,label="59", shape=circle, fixedsize=true, width=.55, peripheries=1];
 s59 -> s276 [fontname="Times-Italic", label="&epsilon;"];
 s276 -> s275 [fontname="Times-Italic", label="&epsilon;"];
-s275 -> s277 [fontsize=11, fontname="Courier", arrowsize=.7, label = "{'!', '#'..'$', ',', '^'..'_', '¬', '∀', '∧'..'∨'}", arrowhead = normal];
+s275 -> s277 [fontsize=11, fontname="Courier", arrowsize=.7, label = "{'!', '#'..'$', ',', '^'..'_', '¬', '∀', '∧'..'∨', '≡'}", arrowhead = normal];
 s277 -> s278 [fontname="Times-Italic", label="&epsilon;"];
 s278:p0 -> s276 [fontname="Times-Italic", label="&epsilon;", style="dashed"];
 s278:p1 -> s279 [fontname="Times-Italic", label="&epsilon;"];

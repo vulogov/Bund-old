@@ -183,6 +183,7 @@ func InitSystemFunctions(vm *vmmod.VM) {
 	vm.AddFunction(",_", DropOppositeElement)
 	vm.AddFunction("^", DupElement)
 	vm.AddFunction("!", ExecuteElement)
+	vm.AddFunction("exec", ExecuteElement)
 	vm.AddFunction("setAlias", SetAlias)
 	vm.AddFunction("≡", SetAlias)
 	vm.AddFunction("alias", GetAlias)

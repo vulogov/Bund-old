@@ -36,4 +36,5 @@ func InitOpSys(vm *vmmod.VM) {
 	vm.Debug("[ BUND ] bund.InitOpSys() reached")
 	vm.AddOperator("<=>", SwapOperator)
 	vm.AddOperator("->", UseOperator)
+	vm.AddOperator("→", UseOperator)
 }

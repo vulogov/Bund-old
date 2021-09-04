@@ -3,14 +3,14 @@ module github.com/vulogov/Bund
 go 1.16
 
 require (
-	cloud.google.com/go v0.93.3 // indirect
-	cloud.google.com/go/storage v1.16.0 // indirect
+	cloud.google.com/go v0.94.1 // indirect
+	cloud.google.com/go/storage v1.16.1 // indirect
 	github.com/Azure/azure-storage-blob-go v0.14.0 // indirect
 	github.com/Azure/go-autorest/autorest v0.11.20 // indirect
 	github.com/Azure/go-autorest/autorest/adal v0.9.15 // indirect
 	github.com/Jeffail/gabs/v2 v2.6.1
 	github.com/antlr/antlr4/runtime/Go/antlr v0.0.0-20210826220005-b48c857c3a0e
-	github.com/aws/aws-sdk-go v1.40.32 // indirect
+	github.com/aws/aws-sdk-go v1.40.37 // indirect
 	github.com/c2fo/vfs/v5 v5.8.0
 	github.com/commander-cli/cmd v1.3.0
 	github.com/common-nighthawk/go-figure v0.0.0-20210622060536-734e95fb86be
@@ -22,7 +22,6 @@ require (
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
 	github.com/goml/gobrain v0.0.0-20201212123421-2e2d98ca8249
 	github.com/google/uuid v1.3.0
-	github.com/googleapis/gax-go/v2 v2.1.0 // indirect
 	github.com/levigross/grequests v0.0.0-20190908174114-253788527a1a
 	github.com/lrita/cmap v0.0.0-20200818170753-e987cd3dfa73
 	github.com/mattn/go-isatty v0.0.13 // indirect
@@ -34,13 +33,13 @@ require (
 	github.com/rivo/uniseg v0.2.0 // indirect
 	github.com/tomlazar/table v0.1.0
 	golang.org/x/crypto v0.0.0-20210817164053-32db794688a5 // indirect
-	golang.org/x/exp v0.0.0-20210826195003-46c773283d9d // indirect
-	golang.org/x/net v0.0.0-20210825183410-e898025ed96a // indirect
-	golang.org/x/oauth2 v0.0.0-20210819190943-2bc19b11175f // indirect
-	golang.org/x/sys v0.0.0-20210823070655-63515b42dcdf // indirect
+	golang.org/x/exp v0.0.0-20210903233438-a2d0902c3ac7 // indirect
+	golang.org/x/net v0.0.0-20210903162142-ad29c8ab022f // indirect
+	golang.org/x/sys v0.0.0-20210903071746-97244b99971b // indirect
 	golang.org/x/text v0.3.7 // indirect
 	gonum.org/v1/gonum v0.9.3
-	google.golang.org/genproto v0.0.0-20210827211047-25e5f791fe06 // indirect
+	google.golang.org/api v0.56.0 // indirect
+	google.golang.org/genproto v0.0.0-20210903162649-d08c68adba83 // indirect
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
 )

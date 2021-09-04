@@ -1,5 +1,6 @@
 pre:
 	@echo "=== BUND === [Preinstallation of some stuff]"
+	go get golang.org/x/tools/internal/gocommand@v0.1.5
 	go get gotest.tools/gotestsum
 	go get gopkg.in/alecthomas/kingpin.v2@v2.2.6
 	go get github.com/client9/misspell/cmd/misspell

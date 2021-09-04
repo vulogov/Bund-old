@@ -50,10 +50,10 @@ func matchlongestsuffix(v *vm.VM, e1 *vm.Elem, e2 *vm.Elem) bool {
 
 func rungpo(v *vm.VM, e1 *vm.Elem, e2 *vm.Elem, gpofun func(*vm.VM, *vm.Elem, *vm.Elem) bool) (*vm.Elem, error) {
 	if e1.Type != "glob" {
-		return nil, fmt.Errorf("Pattern for '<===' not found")
+		return nil, fmt.Errorf("Pattern for matching not found")
 	}
 	if e2.Type != "str" {
-		return nil, fmt.Errorf("Pattern matching with '<===' done only with strings")
+		return nil, fmt.Errorf("Pattern matching is done only with strings")
 	}
 	res := gpofun(v, e1, e2)
 	if res == true {
