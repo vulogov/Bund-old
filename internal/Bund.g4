@@ -39,7 +39,9 @@ term
     | function_term
     | lambda_term
     | operation_term
-    | thing_term
+    | file_term
+    | unixcmd_term
+    | json_term
   );
 
 data
@@ -52,35 +54,38 @@ data
     | operator_term
     | separate_term
     | glob_term
-    | thing_term
     | lambda_term
     | ref_call_term
   );
 
 call_term
-  : VALUE=(SYSF|NAME) ('.(' FUNCTOR=(SYS|NAME) ')')?
+  : VALUE=(SYSF|NAME) (':(' FUNCTOR=(SYS|SYSF|NAME) ')')?
   ;
 
 operator_term
-  : VALUE=CMD ('.(' FUNCTOR=(SYS|NAME) ')')?
+  : VALUE=CMD (':(' FUNCTOR=(SYS|SYSF|NAME) ')')?
   ;
 
-ref_call_term:     '`' VALUE=(SYSF|NAME) ;
-ref_operator_term: '`' VALUE=CMD ;
+ref_call_term:     '`' VALUE=(SYSF|NAME) (':(' FUNCTOR=(SYS|SYSF|NAME) ')')? ;
+ref_operator_term: '`' VALUE=CMD (':(' FUNCTOR=(SYS|SYSF|NAME) ')')? ;
 
-boolean_term: VALUE=(TRUE|FALSE)('.(' FUNCTOR=(SYSF|NAME) ')')? ;
-integer_term: VALUE=INTEGER('.(' FUNCTOR=(SYSF|NAME) ')')? ;
-float_term:   VALUE=(FLOAT_NUMBER|'+Inf'|'NaN'|'-Inf'|'Inf')('.(' FUNCTOR=(SYSF|NAME) ')')? ;
-string_term:  VALUE=STRING('.(' FUNCTOR=(SYSF|NAME) ')')? ;
-complex_term: VALUE=COMPLEX_NUMBER('.(' FUNCTOR=(SYSF|NAME) ')')? ;
-glob_term:    VALUE=GLOB('.(' FUNCTOR=(SYSF|NAME) ')')? ;
+boolean_term: VALUE=(TRUE|FALSE)(':(' FUNCTOR=(SYSF|NAME) ')')? ;
+integer_term: VALUE=INTEGER(':(' FUNCTOR=(SYSF|NAME) ')')? ;
+float_term:   VALUE=(FLOAT_NUMBER|'+Inf'|'NaN'|'-Inf'|'Inf')(':(' FUNCTOR=(SYSF|NAME) ')')? ;
+string_term:  (PRE=NAME '@')? VALUE=STRING(':(' FUNCTOR=(SYSF|NAME) ')')? ;
+complex_term: VALUE=COMPLEX_NUMBER(':(' FUNCTOR=(SYSF|NAME) ')')? ;
+glob_term:    VALUE=GLOB(':(' FUNCTOR=(SYSF|NAME) ')')? ;
+file_term:    VALUE=URI(':(' FUNCTOR=(SYSF|NAME) ')')? ;
+unixcmd_term: VALUE=UNIXCMD(':(' FUNCTOR=(SYSF|NAME) ')')? ;
+json_term:    VALUE=JSON(':(' FUNCTOR=(SYSF|NAME) ')')? ;
+
 
 mode_term:    VALUE=(TOBEGIN|TOEND) ;
 
 separate_term: VALUE=SEPARATE ;
 
 datablock_term
-  : '(*' (body+=data)* ')'('.(' FUNCTOR=(SYS|NAME) ')')?
+  : '(*' (body+=data)* ')'(':(' FUNCTOR=(SYS|NAME) ')')?
   ;
 
 matchblock_term
@@ -102,10 +107,6 @@ lambda_term
 
 operation_term
   : '[[' name=CMD ']]' (body+=term)* '.'
-  ;
-
-thing_term
-  : '(n' VALUE=('NaN'|'Inf'|'+Inf'|'-Inf') ')'('.(' FUNCTOR=(SYSF|NAME) ')')?
   ;
 
 
@@ -157,11 +158,11 @@ SYS
   ;
 
 CMD
-  : ('↑'|'√'|'≉'|'≈'|'∐'|'∏'|'∇'|'∆'|'∪'|'∩'|'∉'|'∈'|'⊉'|'⊈'|'⊇'|'⊆'|'⊅'|'⊄'|'⊃'|'⊂'|'÷'|'\\'|'+'|'-'|'&'|'='|'<'|'>'|'*'|'×')+
+  : ('→'|'↑'|'√'|'≉'|'≈'|'∐'|'∏'|'∇'|'∆'|'∪'|'∩'|'∉'|'∈'|'⊉'|'⊈'|'⊇'|'⊆'|'⊅'|'⊄'|'⊃'|'⊂'|'÷'|'\\'|'+'|'-'|'&'|'='|'<'|'>'|'*'|'×')+
   ;
 
 SYSF
-  : ('∧'|'∨'|'#'|','|'$'|'^'|'_'|'!'|'¬')+
+  : ('∧'|'∨'|'#'|','|'$'|'^'|'_'|'!'|'¬'|'∀'|'≡')+
   ;
 
 SLASH:   '/' ;
@@ -177,13 +178,25 @@ GLOB
   : GLOB_PATTERN
   ;
 
+URI
+  : URI_PATTERN
+  ;
+
+UNIXCMD
+  : CMD_PATTERN
+  ;
+
+JSON
+  : JSON_PATTERN
+  ;
+
 SEPARATE
   : '|'
   ;
 
 
 COMMENT
-  : '##' ~[\r\n]* -> skip
+  : '##'  .*? [\r\n] -> skip
   ;
 BLOCK_COMMENT
   :   '/*' .*? '*/' -> skip
@@ -225,6 +238,21 @@ fragment POINT_FLOAT
 fragment GLOB_PATTERN
   : 'g\'' ('\\' (RN | .) | ~[\\\r\n'])* '\''
   | 'g"'  ('\\' (RN | .) | ~[\\\r\n"])* '"'
+  ;
+
+fragment URI_PATTERN
+  : 'f\'' ('\\' (RN | .) | ~[\\\r\n'])* '\''
+  | 'f"'  ('\\' (RN | .) | ~[\\\r\n"])* '"'
+  ;
+
+fragment CMD_PATTERN
+  : '!\'' ('\\' (RN | .) | ~[\\\r\n'])* '\''
+  | '!"'  ('\\' (RN | .) | ~[\\\r\n"])* '"'
+  ;
+
+fragment JSON_PATTERN
+  : 'j\'' ('\\' (RN | .) | ~[\\\r\n'])* '\''
+  | 'j"'  ('\\' (RN | .) | ~[\\\r\n"])* '"'
   ;
 
 fragment RN

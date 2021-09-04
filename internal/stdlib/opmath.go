@@ -209,7 +209,7 @@ func PowOperator(vm *vmmod.VM, e1 *vmmod.Elem, e2 *vmmod.Elem) (*vmmod.Elem, err
 				res := new(mat.Dense)
 				x, y := e2.Value.(*mat.Dense).Dims()
 				if x != y {
-					return nil, fmt.Errorf("I can not perform ** for those dimentions of MAT: %vx%v", x, y)
+					return nil, fmt.Errorf("I can not perform ** for those dimensions of MAT: %vx%v", x, y)
 				}
 				vm.Debug("Performing %vx%v ** %v", x, y, p)
 				res.Pow(e2.Value.(*mat.Dense), p)
@@ -222,7 +222,7 @@ func PowOperator(vm *vmmod.VM, e1 *vmmod.Elem, e2 *vmmod.Elem) (*vmmod.Elem, err
 				p := int(e2.Value.(*big.Int).Int64())
 				x, y := e1.Value.(*mat.Dense).Dims()
 				if x != y {
-					return nil, fmt.Errorf("I can not perform ** for those dimentions of MAT: %vx%v", x, y)
+					return nil, fmt.Errorf("I can not perform ** for those dimensions of MAT: %vx%v", x, y)
 				}
 				vm.Debug("Performing %vx%v ** %v", x, y, p)
 				res.Pow(e1.Value.(*mat.Dense), p)

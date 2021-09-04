@@ -6,5 +6,5 @@ import (
 
 func Shell() {
 	Init()
-	log.Debug("[ BUND ] tsak.Shell() is reached")
+	log.Debug("[ BUND ] bund.Shell() is reached")
 }

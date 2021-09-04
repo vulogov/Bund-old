@@ -1,0 +1,4 @@
+(
+  1 42:(seq) + /* This construct creates sequence 1..42 */
+  `println over
+)

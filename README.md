@@ -26,7 +26,7 @@ Proceed to the https://github.com/vulogov/Bund and check-out most up-to date ver
 ```
 make
 ```
-If after a while you will see something like that, then compilation was succesful.
+If after a while you will see something like that, then compilation was successful.
 
 ```
 === Bund === [ cover-report     ]: generating coverage results...
@@ -46,4 +46,3 @@ https://github.com/vulogov/Bund/blob/master/Documentation/Bund%20_Hello%20world.
 ## And what's next
 
 Feel free to report any bugs or issues with BUND here https://github.com/vulogov/Bund/issues
- 

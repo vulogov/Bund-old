@@ -2,6 +2,8 @@ package vm
 
 import (
 	"fmt"
+
+	"github.com/gammazero/deque"
 )
 
 type BundFunction func(vm *VM, e *Elem) (*Elem, error)
@@ -57,6 +59,26 @@ func (vm *VM) HasUserFunctionInNS(name string, nsname string) bool {
 		return false
 	}
 	return ns.HasLambda(name)
+}
+
+func (vm *VM) SetUserFunctionInNS(nsname string, name string, c *deque.Deque) bool {
+	if !vm.IsStack() {
+		vm.Error("Attempt to SetUserFunctionInNS(%v) on empty context", name)
+		return false
+	}
+	ns := vm.AsNS(nsname)
+	if ns == nil {
+		vm.Error("Ns(%v) not exists", nsname)
+		return false
+	}
+	if _, ok := ns.Fun.Load(name); ok {
+		ns.VM.Debug("LAMBDA already exists %v: %v", ns.Name, name)
+		return false
+	} else {
+		ns.VM.Debug("Registering LAMBDA in %v: %v", ns.Name, name)
+		ns.Fun.Store(name, c)
+	}
+	return true
 }
 
 func (vm *VM) GetFunction(name string) (BundFunction, error) {

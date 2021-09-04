@@ -1,0 +1,37 @@
+digraph ATN {
+rankdir=LR;
+s44[fontsize=11, label="44", shape=doublecircle, fixedsize=true, width=.6];
+s192[fontsize=11,label="&rarr;\n192*", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s193[fontsize=11,label="&larr;\n193", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s194[fontsize=11,label="{194*\nd=2|{<p0>|<p1>}}", shape=record, fixedsize=false, peripheries=1];
+s195[fontsize=11,label="195", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s196[fontsize=11,label="196*", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s197[fontsize=11,label="197", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s198[fontsize=11,label="&rarr;\n198+", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s199[fontsize=11,label="&larr;\n199", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s200[fontsize=11,label="{200+\nd=3|{<p0>|<p1>}}", shape=record, fixedsize=false, peripheries=1];
+s201[fontsize=11,label="201", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s202[fontsize=11,label="{&rarr;\n202\nd=4|{<p0>|<p1>}}", shape=record, fixedsize=false, peripheries=1];
+s43[fontsize=11,label="43", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s203[fontsize=11,label="&larr;\n203", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s190[fontsize=11,label="190", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s191[fontsize=11,label="191", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s43 -> s202 [fontname="Times-Italic", label="&epsilon;"];
+s202:p0 -> s190 [fontname="Times-Italic", label="&epsilon;"];
+s202:p1 -> s198 [fontname="Times-Italic", label="&epsilon;"];
+s190 -> s194 [fontsize=11, fontname="Courier", arrowsize=.7, label = "<NON_ZERO_DIGIT>", arrowhead = normal];
+s198 -> s197 [fontname="Times-Italic", label="&epsilon;"];
+s194:p0 -> s192 [fontname="Times-Italic", label="&epsilon;"];
+s194:p1 -> s195 [fontname="Times-Italic", label="&epsilon;"];
+s197 -> s199 [fontsize=11, fontname="Courier", arrowsize=.7, label = "'0'", arrowhead = normal];
+s192 -> s191 [fontname="Times-Italic", label="&epsilon;"];
+s195 -> s203 [fontname="Times-Italic", label="&epsilon;"];
+s199 -> s200 [fontname="Times-Italic", label="&epsilon;"];
+s191 -> s193 [fontsize=11, fontname="Courier", arrowsize=.7, label = "<DIGIT>", arrowhead = normal];
+s203 -> s44 [fontname="Times-Italic", label="&epsilon;"];
+s200:p0 -> s198 [fontname="Times-Italic", label="&epsilon;", style="dashed"];
+s200:p1 -> s201 [fontname="Times-Italic", label="&epsilon;"];
+s193 -> s196 [fontname="Times-Italic", label="&epsilon;"];
+s201 -> s203 [fontname="Times-Italic", label="&epsilon;"];
+s196 -> s194 [fontname="Times-Italic", label="&epsilon;", style="dashed"];
+}

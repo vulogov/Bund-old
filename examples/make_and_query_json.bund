@@ -1,0 +1,20 @@
+##
+## JSON creation and querying example
+##
+
+(
+  'data'                          /* Will be used by json/Array/Get */
+  'answer'                        /* Will be used by json/Value/Get */
+  (* 'answer' 42 'not_answer' 41) /* Will be used by json/Value/Set */
+  (* 'data' 1 'Hello world' 3.14) /* Will be used by json/Array/Add */
+  j'{}'  /* First, let's create an empty JSON */
+  /*
+    Now, we do have JSON on top of the stack and
+    other data for make/query JSON also in Stack
+  */
+  json/Array/Add
+  json/Value/Set
+  json/Value/Get println ,         /* Get, Print, Drop value */
+  json/Array/Get println           /* Get, Print array */
+)
+## the End

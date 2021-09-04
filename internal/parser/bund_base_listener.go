@@ -117,6 +117,24 @@ func (s *BaseBundListener) EnterGlob_term(ctx *Glob_termContext) {}
 // ExitGlob_term is called when production glob_term is exited.
 func (s *BaseBundListener) ExitGlob_term(ctx *Glob_termContext) {}
 
+// EnterFile_term is called when production file_term is entered.
+func (s *BaseBundListener) EnterFile_term(ctx *File_termContext) {}
+
+// ExitFile_term is called when production file_term is exited.
+func (s *BaseBundListener) ExitFile_term(ctx *File_termContext) {}
+
+// EnterUnixcmd_term is called when production unixcmd_term is entered.
+func (s *BaseBundListener) EnterUnixcmd_term(ctx *Unixcmd_termContext) {}
+
+// ExitUnixcmd_term is called when production unixcmd_term is exited.
+func (s *BaseBundListener) ExitUnixcmd_term(ctx *Unixcmd_termContext) {}
+
+// EnterJson_term is called when production json_term is entered.
+func (s *BaseBundListener) EnterJson_term(ctx *Json_termContext) {}
+
+// ExitJson_term is called when production json_term is exited.
+func (s *BaseBundListener) ExitJson_term(ctx *Json_termContext) {}
+
 // EnterMode_term is called when production mode_term is entered.
 func (s *BaseBundListener) EnterMode_term(ctx *Mode_termContext) {}
 
@@ -164,9 +182,3 @@ func (s *BaseBundListener) EnterOperation_term(ctx *Operation_termContext) {}
 
 // ExitOperation_term is called when production operation_term is exited.
 func (s *BaseBundListener) ExitOperation_term(ctx *Operation_termContext) {}
-
-// EnterThing_term is called when production thing_term is entered.
-func (s *BaseBundListener) EnterThing_term(ctx *Thing_termContext) {}
-
-// ExitThing_term is called when production thing_term is exited.
-func (s *BaseBundListener) ExitThing_term(ctx *Thing_termContext) {}

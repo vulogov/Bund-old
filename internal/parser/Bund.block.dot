@@ -1,0 +1,25 @@
+digraph ATN {
+rankdir=LR;
+s7[fontsize=11, label="7", shape=doublecircle, fixedsize=true, width=.6];
+s80[fontsize=11,label="80", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s81[fontsize=11,label="81*", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s82[fontsize=11,label="82", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s83[fontsize=11,label="83", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s6[fontsize=11,label="6", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s75[fontsize=11,label="75", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s76[fontsize=11,label="76", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s77[fontsize=11,label="&rarr;\n77*", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s78[fontsize=11,label="&larr;\n78", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s79[fontsize=11,label="{79*\nd=3|{<p0>|<p1>}}", shape=record, fixedsize=false, peripheries=1];
+s6 -> s75 [fontname="Times-Italic", label="&epsilon;"];
+s75 -> s79 [fontsize=11, fontname="Courier", arrowsize=.7, label = "'('", arrowhead = normal];
+s79:p0 -> s77 [fontname="Times-Italic", label="&epsilon;"];
+s79:p1 -> s80 [fontname="Times-Italic", label="&epsilon;"];
+s77 -> s76 [fontname="Times-Italic", label="&epsilon;"];
+s80 -> s82 [fontname="Times-Italic", label="&epsilon;"];
+s76 -> s78 [fontsize=11, fontname="Courier", arrowsize=.7, label = "<term>", arrowhead = normal];
+s82 -> s83 [fontsize=11, fontname="Courier", arrowsize=.7, label = "')'", arrowhead = normal];
+s78 -> s81 [fontname="Times-Italic", label="&epsilon;"];
+s83 -> s7 [fontname="Times-Italic", label="&epsilon;"];
+s81 -> s79 [fontname="Times-Italic", label="&epsilon;", style="dashed"];
+}

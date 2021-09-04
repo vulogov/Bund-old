@@ -1,0 +1,34 @@
+digraph ATN {
+rankdir=LR;
+s43[fontsize=11, label="43", shape=doublecircle, fixedsize=true, width=.6];
+s42[fontsize=11,label="42", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s210[fontsize=11,label="210", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s211[fontsize=11,label="211", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s212[fontsize=11,label="&rarr;\n212*", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s213[fontsize=11,label="&larr;\n213", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s214[fontsize=11,label="{214*\nd=20|{<p0>|<p1>}}", shape=record, fixedsize=false, peripheries=1];
+s215[fontsize=11,label="215", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s216[fontsize=11,label="216*", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s217[fontsize=11,label="217", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s218[fontsize=11,label="218", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s219[fontsize=11,label="219", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s220[fontsize=11,label="220", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s221[fontsize=11,label="{&rarr;\n221\nd=21|{<p0>|<p1>}}", shape=record, fixedsize=false, peripheries=1];
+s222[fontsize=11,label="&larr;\n222", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s42 -> s210 [fontname="Times-Italic", label="&epsilon;"];
+s210 -> s214 [fontsize=11, fontname="Courier", arrowsize=.7, label = "'(*'", arrowhead = normal];
+s214:p0 -> s212 [fontname="Times-Italic", label="&epsilon;"];
+s214:p1 -> s215 [fontname="Times-Italic", label="&epsilon;"];
+s212 -> s211 [fontname="Times-Italic", label="&epsilon;"];
+s215 -> s217 [fontname="Times-Italic", label="&epsilon;"];
+s211 -> s213 [fontsize=11, fontname="Courier", arrowsize=.7, label = "<data>", arrowhead = normal];
+s217 -> s221 [fontsize=11, fontname="Courier", arrowsize=.7, label = "')'", arrowhead = normal];
+s213 -> s216 [fontname="Times-Italic", label="&epsilon;"];
+s221:p0 -> s218 [fontname="Times-Italic", label="&epsilon;"];
+s221:p1 -> s222 [fontname="Times-Italic", label="&epsilon;"];
+s216 -> s214 [fontname="Times-Italic", label="&epsilon;", style="dashed"];
+s218 -> s219 [fontsize=11, fontname="Courier", arrowsize=.7, label = "':('", arrowhead = normal];
+s222 -> s43 [fontname="Times-Italic", label="&epsilon;"];
+s219 -> s220 [fontsize=11, fontname="Courier", arrowsize=.7, label = "{SYS, NAME}", arrowhead = normal];
+s220 -> s222 [fontsize=11, fontname="Courier", arrowsize=.7, label = "')'", arrowhead = normal];
+}

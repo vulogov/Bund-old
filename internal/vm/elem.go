@@ -5,9 +5,10 @@ import (
 )
 
 type Elem struct {
-	Name  string
-	Type  string
-	Value interface{}
+	Name    string
+	Type    string
+	Value   interface{}
+	Functor string
 }
 
 const (

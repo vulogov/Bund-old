@@ -10,6 +10,8 @@ import (
 
 type filelist []string
 
+var Argv [][]string
+
 func (i *filelist) Set(value string) error {
 	_, err := os.Stat(value)
 	if os.IsNotExist(err) {
@@ -41,6 +43,7 @@ var (
 	Color   = App.Flag("color", "--color : Enable colors on terminal --no-color : Disable colors .").Default("true").Bool()
 	VBanner = App.Flag("banner", "Display [ BUND ] banner .").Default("false").Bool()
 	DbgFun  = App.Flag("dbgfun", "Interfactive debugger for the function.").String()
+	Args    = App.Flag("args", "String of arguments passed to a script").String()
 
 	Version = App.Command("version", "Display information about [ BUND ]")
 	VTable  = Version.Flag("table", "Display [ BUND ] inner information .").Default("true").Bool()

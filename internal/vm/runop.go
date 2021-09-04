@@ -5,8 +5,16 @@ func (vm *VM) runop(t string, args ...interface{}) {
 	var err error
 
 	if !vm.InLambda() {
-		if len(args) == 2 && len(args[1].(string)) > 0 {
-			functor := args[1].(string)
+		if len(args) >= 3 {
+			functor := ""
+			prefunction := ""
+			if len(args[1].(string)) > 0 {
+				prefunction = args[1].(string)
+			}
+			if len(args[2].(string)) > 0 {
+				functor = args[2].(string)
+			}
+			vm.Debug("RUNOP: %v %v", prefunction, functor)
 			res_eval, err := vm.Opcode(t).InEval(vm, args...)
 			if err != nil {
 				vm.OnError(err, "Error in function application before functor: %v", args[0])
@@ -34,6 +42,9 @@ func (vm *VM) runop(t string, args ...interface{}) {
 		res, err = vm.Opcode(t).InLambda(vm, args...)
 		if err != nil {
 			vm.OnError(err, "Error placing in lambda: %v", t)
+		}
+		if len(args) == 2 && len(args[1].(string)) > 0 {
+			res.Functor = args[1].(string)
 		}
 		ls := vm.CurrentLambda()
 		if ls != nil {

@@ -13,7 +13,7 @@ import (
 
 func Run() {
 	Init()
-	log.Debug("[ BUND ] tsak.Run() is reached")
+	log.Debug("[ BUND ] bund.Run() is reached")
 	vm := vmmod.NewVM(*conf.Main)
 	for _, s := range *conf.Scripts {
 		log.Debugf("[ BUND ] Loading: %v", s)

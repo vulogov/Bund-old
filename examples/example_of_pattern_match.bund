@@ -1,0 +1,14 @@
+(
+  "abc" g'*' ===
+  (* ) ++ "Pattern match to *. Result must be true and it is %v" ++ console/Println
+  'Hello world' g'[h|H]* world' ===
+  (* ) ++ "Pattern match for '[h|H]* world'. Result must be true and it is %v" ++ console/Println
+  '342233' g'33' <===
+  (* ) ++ "Prefix pattern match: 33 to 342233 . Result must be false and it is %v" ++ console/Println
+  '342233' g'34' <===
+  (* ) ++ "Prefix pattern match: 34 to 342233 . Result must be true and it is %v" ++ console/Println
+  'Xello world' g'world' ===>
+  (* ) ++ "Suffix pattern match: 'world' to 'Xello world' . Result must be true and it is %v" ++ console/Println
+  'Xello city' g'world' ===>
+  (* ) ++ "Suffix pattern match: 'world' to 'Xello city' . Result must be false and it is %v" ++ console/Println
+)

@@ -5,9 +5,17 @@ import (
 )
 
 func (l *bundListener) EnterRef_operator_term(c *parser.Ref_operator_termContext) {
-	l.VM.Opcode("ROP").InParser(l.VM, c.GetVALUE().GetText())
+	var functor string
+	if c.GetFUNCTOR() != nil {
+		functor = c.GetFUNCTOR().GetText()
+	}
+	l.VM.Opcode("ROP").InParser(l.VM, c.GetVALUE().GetText(), functor)
 }
 
 func (l *bundExecListener) EnterRef_operator_term(c *parser.Ref_operator_termContext) {
-	l.VM.RunOp("ROP", c.GetVALUE().GetText())
+	var functor string
+	if c.GetFUNCTOR() != nil {
+		functor = c.GetFUNCTOR().GetText()
+	}
+	l.VM.RunOp("ROP", c.GetVALUE().GetText(), functor)
 }

@@ -1,0 +1,7 @@
+(
+  1
+  2
+  3
+  rotate rotate
+  dumpstack
+) /* Outcome is: [ 2, 1, 3,  ]

@@ -1,0 +1,28 @@
+digraph ATN {
+rankdir=LR;
+s27[fontsize=11, label="27", shape=doublecircle, fixedsize=true, width=.6];
+s166[fontsize=11,label="166", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s167[fontsize=11,label="167", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s168[fontsize=11,label="{&rarr;\n168\nd=13|{<p0>|<p1>}}", shape=record, fixedsize=false, peripheries=1];
+s169[fontsize=11,label="&larr;\n169", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s26[fontsize=11,label="26", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s170[fontsize=11,label="170", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s171[fontsize=11,label="171", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s172[fontsize=11,label="172", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s173[fontsize=11,label="173", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s174[fontsize=11,label="{&rarr;\n174\nd=14|{<p0>|<p1>}}", shape=record, fixedsize=false, peripheries=1];
+s175[fontsize=11,label="&larr;\n175", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s26 -> s168 [fontname="Times-Italic", label="&epsilon;"];
+s168:p0 -> s166 [fontname="Times-Italic", label="&epsilon;"];
+s168:p1 -> s169 [fontname="Times-Italic", label="&epsilon;"];
+s166 -> s167 [fontsize=11, fontname="Courier", arrowsize=.7, label = "NAME", arrowhead = normal];
+s169 -> s170 [fontname="Times-Italic", label="&epsilon;"];
+s167 -> s169 [fontsize=11, fontname="Courier", arrowsize=.7, label = "'@'", arrowhead = normal];
+s170 -> s174 [fontsize=11, fontname="Courier", arrowsize=.7, label = "STRING", arrowhead = normal];
+s174:p0 -> s171 [fontname="Times-Italic", label="&epsilon;"];
+s174:p1 -> s175 [fontname="Times-Italic", label="&epsilon;"];
+s171 -> s172 [fontsize=11, fontname="Courier", arrowsize=.7, label = "':('", arrowhead = normal];
+s175 -> s27 [fontname="Times-Italic", label="&epsilon;"];
+s172 -> s173 [fontsize=11, fontname="Courier", arrowsize=.7, label = "{SYSF, NAME}", arrowhead = normal];
+s173 -> s175 [fontsize=11, fontname="Courier", arrowsize=.7, label = "')'", arrowhead = normal];
+}

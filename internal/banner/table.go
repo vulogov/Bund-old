@@ -34,6 +34,7 @@ func Table() {
 			Rows: [][]string{
 				{"Version", conf.EVersion},
 				{"Extended version", conf.BVersion},
+				{"Args", *conf.Args},
 			},
 		}
 		tab.WriteTable(os.Stdout, &cfg)

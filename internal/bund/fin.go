@@ -8,5 +8,5 @@ import (
 
 func Fin() {
 	banner.Banner("[ Zay Gezunt ]")
-	log.Debug("[ BUND ] tsak.Fin() is reached")
+	log.Debug("[ BUND ] bund.Fin() is reached")
 }

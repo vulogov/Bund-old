@@ -24,6 +24,16 @@ func (ns *NS) GetLambda(name string) *deque.Deque {
 	return res
 }
 
+func (ns *NS) HaveLambda(name string) *deque.Deque {
+	var res *deque.Deque
+	if _res, ok := ns.Fun.Load(name); ok {
+		ns.VM.Debug("Returning LAMBDA from %v: %v", ns.Name, name)
+		res = _res.(*deque.Deque)
+		return res
+	}
+	return nil
+}
+
 func (ns *NS) InLambda(name string) bool {
 	if _, ok := ns.Fun.Load(name); ok {
 		ns.LambdasStack.PushBack(name)

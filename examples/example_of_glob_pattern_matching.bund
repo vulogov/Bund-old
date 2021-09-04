@@ -1,0 +1,9 @@
+##
+## Example of use GLOB pattern matching with TRUE-block.
+##
+
+(
+  'Hello'
+  (? g'[H|h]ello*')
+  (true 'We were properly greeted' println)
+)

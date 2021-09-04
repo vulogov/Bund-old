@@ -17,7 +17,7 @@ func ROpEval(vm *VM, args ...interface{}) (*Elem, error) {
 }
 
 func ROpLambda(vm *VM, args ...interface{}) (*Elem, error) {
-	return CallEval(vm, args...)
+	return ROpEval(vm, args...)
 }
 
 func ROpImport(vm *VM, args ...interface{}) {

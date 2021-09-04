@@ -1,0 +1,4 @@
+(
+    [FourtyTwo] 21 * .
+    2 `FourtyTwo ! println
+)

@@ -6,12 +6,28 @@ import (
 	"os"
 	"time"
 
+	"github.com/gammazero/deque"
+
 	vmmod "github.com/vulogov/Bund/internal/vm"
 )
 
 func PassthrougElement(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
 	vm.Debug("PASSTHROUGH: %v", e.Type)
 	return e, nil
+}
+
+func RotateFrontElement(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
+	vm.Put(e)
+	q := vm.Current
+	q.Rotate(1)
+	return nil, nil
+}
+
+func RotateBackElement(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
+	vm.Put(e)
+	q := vm.Current
+	q.Rotate(-1)
+	return nil, nil
 }
 
 func PrintStack(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
@@ -111,9 +127,10 @@ func SleepFun(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
 	var d int
 	switch e.Type {
 	case "int":
-		d = int(e.Value.(*big.Int).Mul(e.Value.(*big.Int), big.NewInt(1000000000)).Int64())
+		res := big.NewInt(0)
+		d = int(res.Mul(e.Value.(*big.Int), big.NewInt(1000000000)).Int64())
 	case "flt":
-		d = int(e.Value.(float64) * 1000000000)
+		d = int(e.Value.(float64) * float64(1000000000))
 	default:
 		return nil, fmt.Errorf("Parameter for 'sleep' is not float or int: %v", e.Type)
 	}
@@ -132,6 +149,31 @@ func ExitFun(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
 	return nil, nil
 }
 
+func NameFun(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
+	vm.Put(e)
+	return &vmmod.Elem{Type: "str", Value: vm.CurrentNS.Name}, nil
+}
+
+func TypeFun(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
+	vm.Put(e)
+	return &vmmod.Elem{Type: "str", Value: e.Type}, nil
+}
+
+func SeqFun(vm *vmmod.VM, e *vmmod.Elem) (*vmmod.Elem, error) {
+	if e.Type == "int" {
+		eh, err := vm.GetType("dblock")
+		vm.OnError(err, "Error in 'seq'")
+		res := eh.Factory(vm)
+		q := res.Value.(*deque.Deque)
+		c := int(e.Value.(*big.Int).Int64())
+		for i := 0; i < c; i++ {
+			q.PushBack(&vmmod.Elem{Type: "int", Value: big.NewInt(int64(i))})
+		}
+		return res, nil
+	}
+	return nil, fmt.Errorf("Exit function require a number in stack: %v", e.Type)
+}
+
 func InitSystemFunctions(vm *vmmod.VM) {
 	vm.Debug("[ BUND ] bund.InitSystemFunctions() reached")
 	vm.AddFunction("passthrough", PassthrougElement)
@@ -141,9 +183,17 @@ func InitSystemFunctions(vm *vmmod.VM) {
 	vm.AddFunction(",_", DropOppositeElement)
 	vm.AddFunction("^", DupElement)
 	vm.AddFunction("!", ExecuteElement)
+	vm.AddFunction("exec", ExecuteElement)
 	vm.AddFunction("setAlias", SetAlias)
+	vm.AddFunction("≡", SetAlias)
 	vm.AddFunction("alias", GetAlias)
 	vm.AddFunction("#", RefElement)
 	vm.AddFunction("sleep", SleepFun)
+	vm.AddFunction("name", NameFun)
+	vm.AddFunction("type", TypeFun)
+	vm.AddFunction("seq", SeqFun)
 	vm.AddFunction("exit", ExitFun)
+	vm.AddFunction("rotateFront", RotateFrontElement)
+	vm.AddFunction("rotate", RotateFrontElement)
+	vm.AddFunction("rotateBack", RotateBackElement)
 }

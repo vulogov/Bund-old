@@ -5,9 +5,17 @@ import (
 )
 
 func (l *bundListener) EnterRef_call_term(c *parser.Ref_call_termContext) {
-	l.VM.Opcode("RCALL").InParser(l.VM, c.GetVALUE().GetText())
+	var functor string
+	if c.GetFUNCTOR() != nil {
+		functor = c.GetFUNCTOR().GetText()
+	}
+	l.VM.Opcode("RCALL").InParser(l.VM, c.GetVALUE().GetText(), functor)
 }
 
 func (l *bundExecListener) EnterRef_call_term(c *parser.Ref_call_termContext) {
-	l.VM.RunOp("RCALL", c.GetVALUE().GetText())
+	var functor string
+	if c.GetFUNCTOR() != nil {
+		functor = c.GetFUNCTOR().GetText()
+	}
+	l.VM.RunOp("RCALL", c.GetVALUE().GetText(), functor)
 }

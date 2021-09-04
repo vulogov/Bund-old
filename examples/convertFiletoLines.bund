@@ -1,0 +1,9 @@
+##
+## We are taking the file /etc/protocols and converting it to datablock_term
+## Also, demonstrating "Unix command" term.
+##
+
+(
+  !'cat /etc/protocols':(str/Lines)
+  println
+)

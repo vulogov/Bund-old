@@ -19,7 +19,7 @@ func DblockToString(vm *VM, e *Elem) string {
 				continue
 			}
 			res = res + eh.ToString(vm, _e.(*Elem))
-			res = res + " "
+			res = res + " ,"
 		}
 		res = res + " )"
 		return res

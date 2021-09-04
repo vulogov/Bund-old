@@ -1,0 +1,19 @@
+digraph ATN {
+rankdir=LR;
+s23[fontsize=11, label="23", shape=doublecircle, fixedsize=true, width=.6];
+s22[fontsize=11,label="22", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s154[fontsize=11,label="154", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s155[fontsize=11,label="155", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s156[fontsize=11,label="156", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s157[fontsize=11,label="157", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s158[fontsize=11,label="{&rarr;\n158\nd=11|{<p0>|<p1>}}", shape=record, fixedsize=false, peripheries=1];
+s159[fontsize=11,label="&larr;\n159", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s22 -> s154 [fontname="Times-Italic", label="&epsilon;"];
+s154 -> s158 [fontsize=11, fontname="Courier", arrowsize=.7, label = "INTEGER", arrowhead = normal];
+s158:p0 -> s155 [fontname="Times-Italic", label="&epsilon;"];
+s158:p1 -> s159 [fontname="Times-Italic", label="&epsilon;"];
+s155 -> s156 [fontsize=11, fontname="Courier", arrowsize=.7, label = "':('", arrowhead = normal];
+s159 -> s23 [fontname="Times-Italic", label="&epsilon;"];
+s156 -> s157 [fontsize=11, fontname="Courier", arrowsize=.7, label = "{SYSF, NAME}", arrowhead = normal];
+s157 -> s159 [fontsize=11, fontname="Courier", arrowsize=.7, label = "')'", arrowhead = normal];
+}

@@ -1,0 +1,13 @@
+##
+## In this example, we do non-destructive returnFrom
+##
+
+(
+  0 ^ ^
+  arg/Len println
+  <
+    (true
+      , arg/Slice/Len println ,
+      arg println
+    )
+)

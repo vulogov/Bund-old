@@ -1,0 +1,29 @@
+digraph ATN {
+rankdir=LR;
+s5[fontsize=11, label="5", shape=doublecircle, fixedsize=true, width=.6];
+s64[fontsize=11,label="64", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s65[fontsize=11,label="65", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s66[fontsize=11,label="66", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s67[fontsize=11,label="67", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s4[fontsize=11,label="4", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s68[fontsize=11,label="&rarr;\n68*", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s69[fontsize=11,label="&larr;\n69", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s70[fontsize=11,label="{70*\nd=2|{<p0>|<p1>}}", shape=record, fixedsize=false, peripheries=1];
+s71[fontsize=11,label="71", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s72[fontsize=11,label="72*", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s73[fontsize=11,label="73", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s74[fontsize=11,label="74", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s4 -> s64 [fontname="Times-Italic", label="&epsilon;"];
+s64 -> s65 [fontsize=11, fontname="Courier", arrowsize=.7, label = "'['", arrowhead = normal];
+s65 -> s66 [fontsize=11, fontname="Courier", arrowsize=.7, label = "NAME", arrowhead = normal];
+s66 -> s70 [fontsize=11, fontname="Courier", arrowsize=.7, label = "':'", arrowhead = normal];
+s70:p0 -> s68 [fontname="Times-Italic", label="&epsilon;"];
+s70:p1 -> s71 [fontname="Times-Italic", label="&epsilon;"];
+s68 -> s67 [fontname="Times-Italic", label="&epsilon;"];
+s71 -> s73 [fontname="Times-Italic", label="&epsilon;"];
+s67 -> s69 [fontsize=11, fontname="Courier", arrowsize=.7, label = "<term>", arrowhead = normal];
+s73 -> s74 [fontsize=11, fontname="Courier", arrowsize=.7, label = "';;'", arrowhead = normal];
+s69 -> s72 [fontname="Times-Italic", label="&epsilon;"];
+s74 -> s5 [fontname="Times-Italic", label="&epsilon;"];
+s72 -> s70 [fontname="Times-Italic", label="&epsilon;", style="dashed"];
+}

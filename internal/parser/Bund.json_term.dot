@@ -1,0 +1,19 @@
+digraph ATN {
+rankdir=LR;
+s37[fontsize=11, label="37", shape=doublecircle, fixedsize=true, width=.6];
+s36[fontsize=11,label="36", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s200[fontsize=11,label="200", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s201[fontsize=11,label="201", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s202[fontsize=11,label="202", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s203[fontsize=11,label="203", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s204[fontsize=11,label="{&rarr;\n204\nd=19|{<p0>|<p1>}}", shape=record, fixedsize=false, peripheries=1];
+s205[fontsize=11,label="&larr;\n205", shape=circle, fixedsize=true, width=.55, peripheries=1];
+s36 -> s200 [fontname="Times-Italic", label="&epsilon;"];
+s200 -> s204 [fontsize=11, fontname="Courier", arrowsize=.7, label = "JSON", arrowhead = normal];
+s204:p0 -> s201 [fontname="Times-Italic", label="&epsilon;"];
+s204:p1 -> s205 [fontname="Times-Italic", label="&epsilon;"];
+s201 -> s202 [fontsize=11, fontname="Courier", arrowsize=.7, label = "':('", arrowhead = normal];
+s205 -> s37 [fontname="Times-Italic", label="&epsilon;"];
+s202 -> s203 [fontsize=11, fontname="Courier", arrowsize=.7, label = "{SYSF, NAME}", arrowhead = normal];
+s203 -> s205 [fontsize=11, fontname="Courier", arrowsize=.7, label = "')'", arrowhead = normal];
+}
